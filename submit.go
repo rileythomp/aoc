@@ -30,7 +30,12 @@ func main() {
 		return
 	}
 
-	_ = createSubmissionFile(resp, args.Year, args.Day)
+	err = createSubmissionFile(resp, args.Year, args.Day)
+	if err != nil {
+		return
+	}
+
+	_ = openResult(args.Year, args.Day)
 }
 
 type SubmitArgs struct {
@@ -38,6 +43,17 @@ type SubmitArgs struct {
 	Input string
 	Year  string
 	Day   string
+}
+
+func openResult(year, day string) error {
+	filePath := fmt.Sprintf("./%s/day%s/submission.html", year, day)
+	cmd := exec.Command("open", filePath)
+	_, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
+		return err
+	}
+	return nil
 }
 
 func getArgs() (SubmitArgs, bool) {

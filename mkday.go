@@ -13,24 +13,46 @@ import (
 
 func main() {
 	year, day := getYearAndDay()
-	_ = createFiles(year, day)
+	if year != "" && day != "" {
+		_ = createFiles(year, day)
+	}
+}
+
+func printUsage() {
+	fmt.Println("Usage:")
+	fmt.Println("go run mkday.go <year> <day>")
+	fmt.Println("Defaults:")
+	fmt.Println("year: current year")
+	fmt.Println("day:  next day")
+	fmt.Println("So if no arguments are passed, it will wait until the next puzzle is released at midnight")
 }
 
 func getYearAndDay() (string, string) {
 	args := os.Args[1:]
-	var year, day string
-	if len(args) > 1 {
-		year, day = args[0], args[1]
-	} else {
+	y, _, d := time.Now().Date()
+	var (
+		year = fmt.Sprint(y)
+		day  = fmt.Sprint(d + 1)
+	)
+	for i, arg := range args {
+		if arg == "-h" || arg == "--help" {
+			printUsage()
+			return "", ""
+		}
+		if i == 0 {
+			year = arg
+		} else if i == 1 {
+			day = arg
+		}
+	}
+	if year == fmt.Sprint(y) && day == fmt.Sprint(d+1) {
 		fmt.Println("Waiting until problem is released at midnight...")
-		curYear, _, initDay := time.Now().Date()
-		curDay, seconds := initDay, 0
-		for curDay == initDay {
+		curDay, seconds := d, 0
+		for curDay < d+1 {
 			time.Sleep(time.Second)
 			seconds++
 			_, _, curDay = time.Now().Date()
 		}
-		year, day = fmt.Sprint(curYear), fmt.Sprint(curDay)
 		fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
 	}
 	return year, day
