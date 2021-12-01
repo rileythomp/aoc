@@ -7,11 +7,11 @@ import (
 	"strconv"
 )
 
-func part1(dirs []string) int {
+func part1(strs []string) int {
 	return 0
 }
 
-func part2(dirs []string) int {
+func part2(strs []string) int {
 	return 0
 }
 
