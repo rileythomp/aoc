@@ -15,6 +15,6 @@ will generate
 
 If a year and day are not given, then it will wait until a new problem is released at midnight and then generate the files.
 
-![midnight](midnight.png)
+![midnight](imgs/midnight.png)
 
-![output](output.png)
+![output](imgs/output.png)
