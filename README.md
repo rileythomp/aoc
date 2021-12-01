@@ -1,14 +1,14 @@
 # aoc
 Advent of Code Solutions.
 
-Usage:\
+**Usage:**\
 NB: Must have environment variable `AOC_COOKIE` set to your AoC API cookie.
 
 Running\
 `go run autocurday.go`\
-will wait until a new problem is released and then generate\
-`aoc/<year>/day<day>/main.go`: An AoC boilerplate Go file.
-`aoc/<year>/day<day>/input.txt`: The problem input from the AoC API.
+will wait until a new problem is released at midnight and then generate\
+`aoc/<year>/day<day>/main.go`: An AoC boilerplate Go file.\
+`aoc/<year>/day<day>/input.txt`: The problem input from the AoC API.\
 `aoc/<year>/day<day>/main.txt`: An empty file for test input.
 
 Running\
