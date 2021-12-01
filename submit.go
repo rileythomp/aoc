@@ -30,10 +30,7 @@ func main() {
 		return
 	}
 
-	err = createSubmissionFile(resp, args.Year, args.Day)
-	if err != nil {
-		return
-	}
+	_ = createSubmissionFile(resp, args.Year, args.Day)
 }
 
 type SubmitArgs struct {

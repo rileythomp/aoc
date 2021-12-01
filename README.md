@@ -5,6 +5,15 @@ Advent of Code Solutions.
 NB: Must have environment variable `AOC_COOKIE` set to your AoC API cookie.
 
 Running\
+`go run submit.go <level> <input> <year> <day>`\
+will automatically submit the output of\
+`go run main.go <level> <input>`\
+to the AoC API. It then generates the AoC submission response locally
+`aoc/<year>/day<day>/submission.html`
+
+---
+
+Running\
 `go run mkday.go <year> <day>`\
 will generate
 

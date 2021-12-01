@@ -17,7 +17,7 @@ func part2(strs []string) int {
 
 func main() {
 	args := os.Args[1:]
-	fileName, part := args[0], args[1]
+	part, fileName := args[0], args[1]
 
 	file, _ := os.Open(fileName)
 	defer file.Close()
