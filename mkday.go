@@ -8,18 +8,15 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"time"
 )
 
-func getInput(year, day string) []byte {
-	uri := fmt.Sprintf("https://adventofcode.com/%s/day/%s/input", year, day)
+func getAoC(year, day, uri string) []byte {
 	urlObj, _ := url.ParseRequestURI(uri)
 	client := &http.Client{}
 	client.Jar, _ = cookiejar.New(nil)
 	client.Jar.SetCookies(urlObj, []*http.Cookie{
-		{
-			Name:  "session",
-			Value: os.Getenv("AOC_COOKIE"),
-		},
+		{Name: "session", Value: os.Getenv("AOC_COOKIE")},
 	})
 	resp, _ := client.Get(uri)
 	body, _ := ioutil.ReadAll(io.LimitReader(resp.Body, 1048576))
@@ -34,14 +31,36 @@ func getBoilerplate() []byte {
 
 func main() {
 	args := os.Args[1:]
-	year, day := args[0], args[1]
+	var year, day string
+	if len(args) > 1 {
+		year, day = args[0], args[1]
+	} else {
+		fmt.Println("Waiting until problem is released at midnight...")
+		curYear, _, initDay := time.Now().Date()
+		curDay := initDay
+		for curDay == initDay {
+			time.Sleep(time.Second)
+			_, _, curDay = time.Now().Date()
+		}
+		year, day = fmt.Sprint(curYear), fmt.Sprint(curDay)
+	}
+	fmt.Printf("Downloading %s day %s...\n", year, day)
 
-	input := getInput(year, day)
-	boilerplate := getBoilerplate()
-
+	uri := fmt.Sprintf("https://adventofcode.com/%s/day/%s", year, day)
 	path := fmt.Sprintf("./%s/day%s", year, day)
 	_ = os.MkdirAll(path, os.ModePerm)
-	_ = os.WriteFile(fmt.Sprintf("%s/%s", path, "test.txt"), []byte{}, os.ModePerm)
-	_ = os.WriteFile(fmt.Sprintf("%s/%s", path, "input.txt"), input, os.ModePerm)
-	_ = os.WriteFile(fmt.Sprintf("%s/%s", path, "main.go"), boilerplate, os.ModePerm)
+
+	files := []struct {
+		Name    string
+		Content []byte
+	}{
+		{Name: "problem.html", Content: getAoC(year, day, uri)},
+		{Name: "input.txt", Content: getAoC(year, day, uri+"/input")},
+		{Name: "test.txt", Content: []byte{}},
+		{Name: "main.go", Content: getBoilerplate()},
+	}
+	for _, file := range files {
+		_ = os.WriteFile(fmt.Sprintf("%s/%s", path, file.Name), file.Content, os.ModePerm)
+		fmt.Println("Created " + fmt.Sprintf("%s/%s", path, file.Name))
+	}
 }
