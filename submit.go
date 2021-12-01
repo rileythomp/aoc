@@ -78,9 +78,9 @@ func getArgs() (SubmitArgs, bool) {
 		} else if i == 1 {
 			sa.Input = arg
 		} else if i == 2 {
-			sa.Year = arg
-		} else if i == 3 {
 			sa.Day = arg
+		} else if i == 3 {
+			sa.Year = arg
 		}
 	}
 	path := fmt.Sprintf("./%s/day%s", sa.Year, sa.Day)
@@ -98,12 +98,12 @@ func getArgs() (SubmitArgs, bool) {
 
 func printUsage() {
 	fmt.Println("Usage:")
-	fmt.Println("go run submit.go <level> <input> <year> <day>")
+	fmt.Println("go run submit.go <level> <input> <day> <year>")
 	fmt.Println("Defaults:")
 	fmt.Println("level: 1")
 	fmt.Println("input: test.txt")
-	fmt.Println("year:  current year")
-	fmt.Println("date:  current day")
+	fmt.Println("day:  current year")
+	fmt.Println("year:  current day")
 }
 
 func getAnswer(input, level, year, day string) (string, error) {

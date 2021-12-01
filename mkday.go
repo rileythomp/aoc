@@ -20,10 +20,10 @@ func main() {
 
 func printUsage() {
 	fmt.Println("Usage:")
-	fmt.Println("go run mkday.go <year> <day>")
+	fmt.Println("go run mkday.go <day> <year>")
 	fmt.Println("Defaults:")
-	fmt.Println("year: current year")
 	fmt.Println("day:  next day")
+	fmt.Println("year: current year")
 	fmt.Println("So if no arguments are passed, it will wait until the next puzzle is released at midnight")
 }
 
@@ -40,9 +40,9 @@ func getYearAndDay() (string, string) {
 			return "", ""
 		}
 		if i == 0 {
-			year = arg
-		} else if i == 1 {
 			day = arg
+		} else if i == 1 {
+			year = arg
 		}
 	}
 	if year == fmt.Sprint(y) && day == fmt.Sprint(d+1) {
