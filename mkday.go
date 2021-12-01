@@ -37,12 +37,14 @@ func main() {
 	} else {
 		fmt.Println("Waiting until problem is released at midnight...")
 		curYear, _, initDay := time.Now().Date()
-		curDay := initDay
+		curDay, seconds := initDay, 0
 		for curDay == initDay {
 			time.Sleep(time.Second)
+			seconds++
 			_, _, curDay = time.Now().Date()
 		}
 		year, day = fmt.Sprint(curYear), fmt.Sprint(curDay)
+		fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
 	}
 	fmt.Printf("Downloading %s day %s...\n", year, day)
 

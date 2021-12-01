@@ -14,3 +14,7 @@ will generate
 `aoc/<year>/day<day>/main.go`: An AoC boilerplate Go file.
 
 If a year and day are not given, then it will wait until a new problem is released at midnight and then generate the files.
+
+![midnight](midnight.png)
+
+![output](output.png)
