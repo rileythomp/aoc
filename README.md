@@ -11,6 +11,12 @@ will automatically submit the output of\
 to the AoC API. It then generates the AoC submission response locally
 `aoc/<year>/day<day>/submission.html`
 
+The default values are:
+- level: 1
+- input: input.txt
+- year: current yer
+- day: current day
+
 ---
 
 Running\
