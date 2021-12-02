@@ -8,14 +8,23 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"os/exec"
+	"strings"
 	"time"
 )
 
 func main() {
-	year, day := getYearAndDay()
-	if year != "" && day != "" {
-		_ = createFiles(year, day)
+	year, day, ok := getYearAndDay()
+	if !ok {
+		return
 	}
+
+	err := createFiles(year, day)
+	if err != nil {
+		return
+	}
+
+	_ = openProblem(year, day)
 }
 
 func printUsage() {
@@ -27,7 +36,18 @@ func printUsage() {
 	fmt.Println("So if no arguments are passed, it will wait until the next puzzle is released at midnight")
 }
 
-func getYearAndDay() (string, string) {
+func openProblem(year, day string) error {
+	filePath := fmt.Sprintf("./%s/day%s/problem.html", year, day)
+	cmd := exec.Command("open", filePath)
+	_, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
+		return err
+	}
+	return nil
+}
+
+func getYearAndDay() (string, string, bool) {
 	args := os.Args[1:]
 	y, _, d := time.Now().Date()
 	var (
@@ -37,7 +57,7 @@ func getYearAndDay() (string, string) {
 	for i, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			printUsage()
-			return "", ""
+			return "", "", false
 		}
 		if i == 0 {
 			day = arg
@@ -55,7 +75,7 @@ func getYearAndDay() (string, string) {
 		}
 		fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
 	}
-	return year, day
+	return year, day, true
 }
 
 func createFiles(year, day string) error {
@@ -77,6 +97,7 @@ func createFiles(year, day string) error {
 		{Name: "main.go", Content: getBoilerplate()},
 	}
 	for _, file := range files {
+		file.Content = []byte(strings.Replace(string(file.Content), "/static/style.css?26", "https://adventofcode.com/static/style.css", 1))
 		err = os.WriteFile(fmt.Sprintf("%s/%s", path, file.Name), file.Content, os.ModePerm)
 		if err != nil {
 			fmt.Printf("Error creating %s/%s\n", path, file.Name)
