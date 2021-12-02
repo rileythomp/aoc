@@ -1,8 +1,13 @@
-123 -> x
-456 -> y
-x AND y -> d
-x OR y -> e
-x LSHIFT 2 -> f
-y RSHIFT 2 -> g
-NOT x -> h
-NOT y -> a
+xx AND yx -> zx
+rx LSHIFT sx -> tx
+5 LSHIFT 9 -> wx
+lx -> mx
+412 -> lx
+zx OR wx -> b
+NOT rx -> nx
+4 OR 7 -> yx
+NOT px -> a
+b RSHIFT qx -> rx
+101 -> xx
+mx OR nx -> px
+4 RSHIFT 8 -> qx
