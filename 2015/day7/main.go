@@ -14,18 +14,45 @@ type Wire struct {
 	Resolved bool
 }
 
+func processGatePart(gatePart string, wires map[string]Wire) (uint16, bool) {
+	// if its a number
+	if num, err := strconv.Atoi(gatePart); err == nil {
+		return uint16(num), true
+	}
+
+	// its a wire, check map
+	if wire, ok := wires[gatePart]; ok {
+		return wire.Val, true
+	}
+	return 0, false
+}
+
 func processGate(gate string, wires map[string]Wire) (uint16, bool) {
+	// X
+	if num, err := strconv.Atoi(gate); err == nil {
+		return uint16(num), true
+	}
+	gateParts := strings.Split(gate, " ")
 	// NOT X
 	if strings.Contains(gate, "NOT") {
-		gateParts := strings.Split(gate, " ")
-		input := gateParts[1]
-		if num, err := strconv.Atoi(input); err == nil {
-			return ^uint16(num), true
+		val, ok := processGatePart(gateParts[1], wires)
+		if ok {
+			return ^val, true
 		}
-		wire, ok := wires[input]
-		if ok && wire.Resolved {
-			return ^wire.Val, true
-		}
+	}
+	left, lOk := processGatePart(gateParts[0], wires)
+	right, rOk := processGatePart(gateParts[2], wires)
+	if strings.Contains(gate, "AND") && lOk && rOk {
+		return (uint16(left) & uint16(right)), true
+	}
+	if strings.Contains(gate, "OR") && lOk && rOk {
+		return (uint16(left) | uint16(right)), true
+	}
+	if strings.Contains(gate, "LSHIFT") && lOk && rOk {
+		return (uint16(left) << uint16(right)), true
+	}
+	if strings.Contains(gate, "RSHIFT") && rOk && lOk {
+		return (uint16(left) >> uint16(right)), true
 	}
 	return 0, false
 }
