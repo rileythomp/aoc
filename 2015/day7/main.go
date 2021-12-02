@@ -37,9 +37,8 @@ func (s *Stack) Top() string {
 }
 
 type Wire struct {
-	Val      uint16
-	Gate     string
-	Resolved bool
+	Val  uint16
+	Gate string
 }
 
 func processGatePart(gatePart string, wires map[string]Wire) (uint16, bool) {
@@ -127,16 +126,14 @@ func part1(strs []string) int {
 		val, l, r := processGate(gate, wires)
 		if l == "" && r == "" {
 			wires[w] = Wire{
-				Val:      val,
-				Gate:     gate,
-				Resolved: true,
+				Val:  val,
+				Gate: gate,
 			}
 			stack.Pop()
 		} else {
 			wires[w] = Wire{
-				Val:      0,
-				Gate:     gate,
-				Resolved: false,
+				Val:  0,
+				Gate: gate,
 			}
 			if l != "" {
 				stack.Push(l)
@@ -153,7 +150,7 @@ func part1(strs []string) int {
 func part2(strs []string) int {
 	for i, str := range strs {
 		if strings.Contains(str, " -> b") {
-			strs[i] = fmt.Sprintf("%d -> b", 3176)
+			strs[i] = fmt.Sprintf("%d -> b", part1(strs))
 			break
 		}
 	}
