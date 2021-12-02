@@ -128,7 +128,7 @@ func submitAnswer(ans, level, year, day string) ([]byte, error) {
 	var err error
 	form := url.Values{}
 	form.Add("level", level)
-	form.Add("answer", string(ans))
+	form.Add("answer", ans)
 	client := &http.Client{}
 	client.Jar, err = cookiejar.New(nil)
 	if err != nil {
@@ -149,10 +149,10 @@ func submitAnswer(ans, level, year, day string) ([]byte, error) {
 		fmt.Printf("There was an error creating the POST request for submission to the uri %s: %s\n", uri, err.Error())
 		return nil, err
 	}
-	fmt.Printf("Submitting %s for year %s day %s level %s\n", string(ans), year, day, level)
+	fmt.Printf("Submitting %s for year %s day %s level %s\n", ans, year, day, level)
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Printf("There was an error submitting the answer %s for year %s day %s: %s\n", string(ans), year, day, err.Error())
+		fmt.Printf("There was an error submitting the answer %s for year %s day %s: %s\n", ans, year, day, err.Error())
 		return nil, err
 	}
 	body, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1048576))
