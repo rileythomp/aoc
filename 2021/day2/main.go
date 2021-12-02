@@ -12,15 +12,13 @@ func part1(strs []string) int {
 	h, d := 0, 0
 	for _, str := range strs {
 		parts := strings.Split(str, " ")
+		num, _ := strconv.Atoi(parts[1])
 		dir := parts[0]
 		if dir == "forward" {
-			num, _ := strconv.Atoi(parts[1])
 			h += num
 		} else if dir == "down" {
-			num, _ := strconv.Atoi(parts[1])
 			d += num
 		} else if dir == "up" {
-			num, _ := strconv.Atoi(parts[1])
 			d -= num
 		}
 	}
@@ -31,16 +29,14 @@ func part2(strs []string) int {
 	h, d, aim := 0, 0, 0
 	for _, str := range strs {
 		parts := strings.Split(str, " ")
+		num, _ := strconv.Atoi(parts[1])
 		dir := parts[0]
 		if dir == "forward" {
-			num, _ := strconv.Atoi(parts[1])
 			h += num
-			d += aim * num
+			d += num * aim
 		} else if dir == "down" {
-			num, _ := strconv.Atoi(parts[1])
 			aim += num
 		} else if dir == "up" {
-			num, _ := strconv.Atoi(parts[1])
 			aim -= num
 		}
 	}
