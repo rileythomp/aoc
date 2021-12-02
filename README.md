@@ -8,14 +8,14 @@ Running\
 `go run submit.go <level> <input> <year> <day>`\
 will automatically submit the output of\
 `go run main.go <level> <input>`\
-to the AoC API. It then generates the AoC submission response locally
-`aoc/<year>/day<day>/submission.html`
+to the AoC API. It then generates the AoC submission response locally and opens it with\
+`open aoc/<year>/day<day>/submission.html`
 
 The default values are:
 - level: 1
 - input: input.txt
-- year: current yer
-- day: current day
+- day:   current day
+- year:  current year
 
 ---
 
