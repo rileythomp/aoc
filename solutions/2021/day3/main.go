@@ -12,9 +12,9 @@ func getBits(strs []string) []int {
 	for _, str := range strs {
 		for i, bit := range str {
 			if bit == '1' {
-				bits[i] += 1
+				bits[i]++
 			} else {
-				bits[i] -= 1
+				bits[i]--
 			}
 		}
 	}
