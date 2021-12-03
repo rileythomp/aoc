@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -9,33 +10,74 @@ import (
 )
 
 type Edge struct {
+	Crossed bool
 	Dist    int
 	MinPath int
 }
 
 type Node struct {
+	Name    string
 	Visited bool
 	Edges   map[string]*Edge
 }
 
+func printJSON(i interface{}) {
+	JSONString, _ := json.MarshalIndent(i, "", "	")
+	fmt.Println(string(JSONString))
+}
+
 func findShortestPath(graph map[string]*Node) int {
 	minPath := int(^uint(0) / 2)
-	// have a graph, now find shortest path
-	// for name := range graph {
-	// 	node := graph[name]
-	// 	visited := 1
-	// 	for visited != len(graph) {
-	// 		// pick an unvisited neighbour
-	// 		for name, edge := range node.Edges {
-
-	// 		}
-	// 	}
-
-	// }
+	for _, node := range graph {
+		node.Visited = true
+		stack := &Stack{node}
+		curPath, i := 0, 0
+		_ = i
+		for !stack.IsEmpty() {
+			curNode := stack.Top()
+			fmt.Printf("processing %s\n", curNode.Name)
+			var (
+				neighbour *Node
+				edge      *Edge
+			)
+			for name := range curNode.Edges {
+				if !curNode.Edges[name].Crossed && !graph[name].Visited {
+					neighbour = graph[name]
+					edge = curNode.Edges[name]
+					break
+				}
+			}
+			if edge != nil {
+				// fmt.Printf("%-15s %3d %3d\n", curNode.Name, curPath, edge.Dist)
+				stack.Push(neighbour)
+				neighbour.Visited = true
+				edge.Crossed = true
+				curPath += edge.Dist
+			} else {
+				// fmt.Printf("%-15s %3d %3d\n", curNode.Name, curPath, 0)
+				if len(*stack) == len(graph) {
+					fmt.Println()
+					for _, s := range *stack {
+						fmt.Println(s.Name)
+					}
+					fmt.Println(curPath)
+					fmt.Println()
+				}
+				end := stack.Pop()
+				fmt.Printf("popped %s\n", end.Name)
+				curNode.Visited = false
+				if !stack.IsEmpty() {
+					curPath -= end.Edges[stack.Top().Name].Dist
+				}
+			}
+		}
+		break
+	}
+	printJSON(graph)
 	return minPath
 }
 
-func part1(strs []string) int {
+func initGraph(strs []string) map[string]*Node {
 	graph := map[string]*Node{}
 	for _, str := range strs {
 		parts := strings.Split(str, " ")
@@ -43,6 +85,7 @@ func part1(strs []string) int {
 		dist, _ := strconv.Atoi(d)
 		if _, ok := graph[node1]; !ok {
 			node := &Node{
+				Name:    node1,
 				Visited: false,
 				Edges:   map[string]*Edge{},
 			}
@@ -50,26 +93,26 @@ func part1(strs []string) int {
 		}
 		if _, ok := graph[node2]; !ok {
 			node := &Node{
+				Name:    node2,
 				Visited: false,
 				Edges:   map[string]*Edge{},
 			}
 			graph[node2] = node
 		}
-		edge := &Edge{
+		edge1 := Edge{
+			Crossed: false,
 			Dist:    dist,
 			MinPath: dist,
 		}
-		graph[node1].Edges[node2] = edge
-		graph[node2].Edges[node1] = edge
+		edge2 := edge1
+		graph[node1].Edges[node2] = &edge1
+		graph[node2].Edges[node1] = &edge2
 	}
+	return graph
+}
 
-	// JSONString, err := json.MarshalIndent(graph, "", "	")
-	// if err != nil {
-	// 	return -1
-	// }
-	// fmt.Println(string(JSONString))
-
-	return findShortestPath(graph)
+func part1(strs []string) int {
+	return findShortestPath(initGraph(strs))
 }
 
 func part2(strs []string) int {
@@ -119,4 +162,32 @@ func getArgs() (string, string) {
 		}
 	}
 	return level, fileName
+}
+
+type Stack []*Node
+
+func (s *Stack) IsEmpty() bool {
+	return len(*s) == 0
+}
+
+func (s *Stack) Push(e *Node) {
+	*s = append(*s, e)
+}
+
+func (s *Stack) Pop() *Node {
+	if s.IsEmpty() {
+		return nil
+	}
+	i := len(*s) - 1
+	e := (*s)[i]
+	*s = (*s)[:i]
+	return e
+}
+
+func (s *Stack) Top() *Node {
+	if s.IsEmpty() {
+		return nil
+	}
+	e := (*s)[len(*s)-1]
+	return e
 }
