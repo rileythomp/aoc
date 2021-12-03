@@ -1,502 +1,3349 @@
-processing Faerun
-processing Tristram
-processing Arbre
-processing Tambi
-processing Norrath
-processing Snowdin
-processing Straylight
-processing AlphaCentauri
 
-Faerun
-Tristram
-Arbre
-Tambi
-Norrath
-Snowdin
-Straylight
-AlphaCentauri
-506
+a 0
 
-popped AlphaCentauri
-processing Straylight
-popped Straylight
-processing Snowdin
-processing AlphaCentauri
-processing Straylight
+a
+c 3
 
-Faerun
-Tristram
-Arbre
-Tambi
-Norrath
-Snowdin
-AlphaCentauri
-Straylight
-489
+a
+c
+b 5
 
-popped Straylight
-processing AlphaCentauri
-popped AlphaCentauri
-processing Snowdin
-popped Snowdin
-processing Norrath
-processing Straylight
-processing Snowdin
-popped Snowdin
-processing Straylight
-popped Straylight
-processing Norrath
-processing AlphaCentauri
-processing Snowdin
-popped Snowdin
-processing AlphaCentauri
-popped AlphaCentauri
-processing Norrath
-popped Norrath
-processing Tambi
-processing Snowdin
-processing Norrath
-popped Norrath
-processing Snowdin
-popped Snowdin
-processing Tambi
-processing Straylight
-processing Norrath
-popped Norrath
-processing Straylight
-popped Straylight
-processing Tambi
-processing AlphaCentauri
-processing Norrath
-popped Norrath
-processing AlphaCentauri
-popped AlphaCentauri
-processing Tambi
-popped Tambi
-processing Arbre
-processing Norrath
-processing Tambi
-popped Tambi
-processing Norrath
-popped Norrath
-processing Arbre
-processing Snowdin
-processing Tambi
-popped Tambi
-processing Snowdin
-popped Snowdin
-processing Arbre
-processing Straylight
-processing Tambi
-popped Tambi
-processing Straylight
-popped Straylight
-processing Arbre
-processing AlphaCentauri
-processing Tambi
-popped Tambi
-processing AlphaCentauri
-popped AlphaCentauri
-processing Arbre
-popped Arbre
-processing Tristram
-processing Snowdin
-processing Arbre
-popped Arbre
-processing Snowdin
-popped Snowdin
-processing Tristram
-processing Straylight
-processing Arbre
-popped Arbre
-processing Straylight
-popped Straylight
-processing Tristram
-processing Tambi
-processing Arbre
-popped Arbre
-processing Tambi
-popped Tambi
-processing Tristram
-processing Norrath
-processing Arbre
-popped Arbre
-processing Norrath
-popped Norrath
-processing Tristram
-processing AlphaCentauri
-processing Arbre
-popped Arbre
-processing AlphaCentauri
-popped AlphaCentauri
-processing Tristram
-popped Tristram
-processing Faerun
-processing Tambi
-processing Tristram
-popped Tristram
-processing Tambi
-popped Tambi
-processing Faerun
-processing Norrath
-processing Tristram
-popped Tristram
-processing Norrath
-popped Norrath
-processing Faerun
-processing AlphaCentauri
-processing Tristram
-popped Tristram
-processing AlphaCentauri
-popped AlphaCentauri
-processing Faerun
-processing Arbre
-processing Tristram
-popped Tristram
-processing Arbre
-popped Arbre
-processing Faerun
-processing Snowdin
-processing Tristram
-popped Tristram
-processing Snowdin
-popped Snowdin
-processing Faerun
-processing Straylight
-processing Tristram
-popped Tristram
-processing Straylight
-popped Straylight
-processing Faerun
-popped Faerun
-{
-	"AlphaCentauri": {
-		"Name": "AlphaCentauri",
-		"Visited": false,
-		"Edges": {
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 46,
-				"MinPath": 46
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 3,
-				"MinPath": 3
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 136,
-				"MinPath": 136
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 84,
-				"MinPath": 84
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 107,
-				"MinPath": 107
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 22,
-				"MinPath": 22
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 55,
-				"MinPath": 55
-			}
-		}
-	},
-	"Arbre": {
-		"Name": "Arbre",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 46,
-				"MinPath": 46
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 149,
-				"MinPath": 149
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 115,
-				"MinPath": 115
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 96,
-				"MinPath": 96
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 14,
-				"MinPath": 14
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 143,
-				"MinPath": 143
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 14,
-				"MinPath": 14
-			}
-		}
-	},
-	"Faerun": {
-		"Name": "Faerun",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 3,
-				"MinPath": 3
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 149,
-				"MinPath": 149
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 144,
-				"MinPath": 144
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 71,
-				"MinPath": 71
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 137,
-				"MinPath": 137
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 129,
-				"MinPath": 129
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 65,
-				"MinPath": 65
-			}
-		}
-	},
-	"Norrath": {
-		"Name": "Norrath",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 136,
-				"MinPath": 136
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 115,
-				"MinPath": 115
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 144,
-				"MinPath": 144
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 8,
-				"MinPath": 8
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 23,
-				"MinPath": 23
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 68,
-				"MinPath": 68
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 4,
-				"MinPath": 4
-			}
-		}
-	},
-	"Snowdin": {
-		"Name": "Snowdin",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 84,
-				"MinPath": 84
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 96,
-				"MinPath": 96
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 71,
-				"MinPath": 71
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 8,
-				"MinPath": 8
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 101,
-				"MinPath": 101
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 52,
-				"MinPath": 52
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 105,
-				"MinPath": 105
-			}
-		}
-	},
-	"Straylight": {
-		"Name": "Straylight",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 107,
-				"MinPath": 107
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 14,
-				"MinPath": 14
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 137,
-				"MinPath": 137
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 23,
-				"MinPath": 23
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 101,
-				"MinPath": 101
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 65,
-				"MinPath": 65
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 125,
-				"MinPath": 125
-			}
-		}
-	},
-	"Tambi": {
-		"Name": "Tambi",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 22,
-				"MinPath": 22
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 143,
-				"MinPath": 143
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 129,
-				"MinPath": 129
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 68,
-				"MinPath": 68
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 52,
-				"MinPath": 52
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 65,
-				"MinPath": 65
-			},
-			"Tristram": {
-				"Crossed": true,
-				"Dist": 63,
-				"MinPath": 63
-			}
-		}
-	},
-	"Tristram": {
-		"Name": "Tristram",
-		"Visited": false,
-		"Edges": {
-			"AlphaCentauri": {
-				"Crossed": true,
-				"Dist": 55,
-				"MinPath": 55
-			},
-			"Arbre": {
-				"Crossed": true,
-				"Dist": 14,
-				"MinPath": 14
-			},
-			"Faerun": {
-				"Crossed": false,
-				"Dist": 65,
-				"MinPath": 65
-			},
-			"Norrath": {
-				"Crossed": true,
-				"Dist": 4,
-				"MinPath": 4
-			},
-			"Snowdin": {
-				"Crossed": true,
-				"Dist": 105,
-				"MinPath": 105
-			},
-			"Straylight": {
-				"Crossed": true,
-				"Dist": 125,
-				"MinPath": 125
-			},
-			"Tambi": {
-				"Crossed": true,
-				"Dist": 63,
-				"MinPath": 63
-			}
-		}
-	}
-}
-9223372036854775807
+a
+c
+b
+d 9
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c
+d
+b 13
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a
+c
+d 9
+
+a
+c 3
+
+a
+c
+b 5
+
+a
+c 3
+
+a

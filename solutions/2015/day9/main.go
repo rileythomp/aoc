@@ -12,13 +12,32 @@ import (
 type Edge struct {
 	Crossed bool
 	Dist    int
-	MinPath int
 }
 
 type Node struct {
-	Name    string
-	Visited bool
-	Edges   map[string]*Edge
+	Name        string
+	Visited     bool
+	Edges       map[string]*Edge
+	LastVisited string
+}
+
+func (n *Node) print() {
+	fmt.Println("{")
+	fmt.Printf("\tName: %s\n", n.Name)
+	fmt.Printf("\tVisited: %t\n", n.Visited)
+	JSONString, _ := json.MarshalIndent(n.Edges, "	", "	")
+	fmt.Printf("\t%s\n", string(JSONString))
+	fmt.Println("}")
+
+}
+
+func NewNode(name string) *Node {
+	return &Node{
+		Name:        name,
+		Visited:     false,
+		Edges:       map[string]*Edge{},
+		LastVisited: "",
+	}
 }
 
 func printJSON(i interface{}) {
@@ -26,45 +45,62 @@ func printJSON(i interface{}) {
 	fmt.Println(string(JSONString))
 }
 
+// TODO: This is close, but need to find a way to allow
+// going back to the last visited node if the path (stack) is different
+// could try a hacky string representation
 func findShortestPath(graph map[string]*Node) int {
 	minPath := int(^uint(0) / 2)
-	for _, node := range graph {
-		node.Visited = true
-		stack := &Stack{node}
+	for start := range graph {
+		graph[start].Visited = true
+		stack := &Stack{graph[start]}
 		curPath, i := 0, 0
 		_ = i
+		fmt.Println()
 		for !stack.IsEmpty() {
+			for i, s := range *stack {
+				fmt.Print(s.Name)
+				if i != len(*stack)-1 {
+					fmt.Print("\n")
+				}
+			}
+			fmt.Printf(" %d\n", curPath)
+			fmt.Println()
 			curNode := stack.Top()
-			fmt.Printf("processing %s\n", curNode.Name)
+			// fmt.Printf("processing %s\n", curNode.Name)
+			// curNode.print()
 			var (
-				neighbour *Node
-				edge      *Edge
+				neighbour string
+				// neighbour *Node
+				// edge      *Edge
 			)
 			for name := range curNode.Edges {
-				if !curNode.Edges[name].Crossed && !graph[name].Visited {
-					neighbour = graph[name]
-					edge = curNode.Edges[name]
+				// if !curNode.Edges[n].Crossed && !graph[n].Visited && {
+				if name != curNode.LastVisited && !graph[name].Visited {
+					neighbour = name
+					// neighbour = graph[name]
+					// edge = curNode.Edges[name]
 					break
 				}
 			}
-			if edge != nil {
+			if neighbour != "" {
 				// fmt.Printf("%-15s %3d %3d\n", curNode.Name, curPath, edge.Dist)
-				stack.Push(neighbour)
-				neighbour.Visited = true
-				edge.Crossed = true
-				curPath += edge.Dist
+				stack.Push(graph[neighbour])
+				graph[neighbour].Visited = true
+				// curNode.Edges[name].Crossed = true
+				curPath += curNode.Edges[neighbour].Dist
+				curNode.LastVisited = neighbour
 			} else {
 				// fmt.Printf("%-15s %3d %3d\n", curNode.Name, curPath, 0)
-				if len(*stack) == len(graph) {
-					fmt.Println()
-					for _, s := range *stack {
-						fmt.Println(s.Name)
-					}
-					fmt.Println(curPath)
-					fmt.Println()
-				}
+				// if len(*stack) == len(graph) {
+				// 	fmt.Println()
+				// 	for _, s := range *stack {
+				// 		fmt.Println(s.Name)
+				// 	}
+				// 	fmt.Println(curPath)
+				// 	fmt.Println()
+				// }
 				end := stack.Pop()
-				fmt.Printf("popped %s\n", end.Name)
+				// fmt.Printf("popped %s\n", end.Name)
 				curNode.Visited = false
 				if !stack.IsEmpty() {
 					curPath -= end.Edges[stack.Top().Name].Dist
@@ -84,25 +120,14 @@ func initGraph(strs []string) map[string]*Node {
 		node1, node2, d := parts[0], parts[2], parts[4]
 		dist, _ := strconv.Atoi(d)
 		if _, ok := graph[node1]; !ok {
-			node := &Node{
-				Name:    node1,
-				Visited: false,
-				Edges:   map[string]*Edge{},
-			}
-			graph[node1] = node
+			graph[node1] = NewNode(node1)
 		}
 		if _, ok := graph[node2]; !ok {
-			node := &Node{
-				Name:    node2,
-				Visited: false,
-				Edges:   map[string]*Edge{},
-			}
-			graph[node2] = node
+			graph[node2] = NewNode(node2)
 		}
 		edge1 := Edge{
-			Crossed: false,
-			Dist:    dist,
-			MinPath: dist,
+			// Crossed: false,
+			Dist: dist,
 		}
 		edge2 := edge1
 		graph[node1].Edges[node2] = &edge1
