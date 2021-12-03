@@ -72,7 +72,7 @@ func getYearAndDay(args []string) (string, string, bool) {
 
 func createFiles(year, day string) error {
 	fmt.Printf("Downloading %s day %s...\n", year, day)
-	path := fmt.Sprintf("./%s/day%s", year, day)
+	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
 	err := os.MkdirAll(path, os.ModePerm)
 	if err != nil {
 		fmt.Printf("Error creating %s: %s", path, err.Error())
@@ -121,7 +121,7 @@ func getBoilerplate() ([]byte, error) {
 }
 
 func openProblem(year, day string) error {
-	filePath := fmt.Sprintf("./%s/day%s/problem.html", year, day)
+	filePath := fmt.Sprintf("./solutions/%s/day%s/problem.html", year, day)
 	cmd := exec.Command("open", filePath)
 	_, err := cmd.Output()
 	if err != nil {
