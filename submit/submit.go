@@ -31,28 +31,32 @@ func printUsage() {
 	fmt.Println("year:  current day")
 }
 
-func (s *Submit) Run(args []string) {
+func (s *Submit) Run(args []string) error {
 	sa, ok := getArgs(args)
 	if !ok {
-		return
+		return fmt.Errorf("could not get args")
 	}
 
 	ans, err := getAnswer(sa.Input, sa.Level, sa.Year, sa.Day)
 	if err != nil {
-		return
+		return err
 	}
 
 	resp, err := submitAnswer(ans, sa.Level, sa.Year, sa.Day)
 	if err != nil {
-		return
+		return err
 	}
 
 	err = createSubmissionFile(resp, sa.Year, sa.Day)
 	if err != nil {
-		return
+		return err
 	}
 
-	_ = openResult(sa.Year, sa.Day)
+	if err = openResult(sa.Year, sa.Day); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func getArgs(args []string) (SubmitArgs, bool) {

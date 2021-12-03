@@ -22,18 +22,22 @@ func printUsage() {
 	fmt.Println("So if no arguments are passed, it will wait until the next puzzle is released at midnight")
 }
 
-func (m *Mkday) Run(args []string) {
+func (m *Mkday) Run(args []string) error {
 	year, day, ok := getYearAndDay(args)
 	if !ok {
-		return
+		return fmt.Errorf("could not get year and day")
 	}
 
 	err := createFiles(year, day)
 	if err != nil {
-		return
+		return err
 	}
 
-	_ = openProblem(year, day)
+	if err = openProblem(year, day); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func getYearAndDay(args []string) (string, string, bool) {

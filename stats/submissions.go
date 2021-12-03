@@ -18,16 +18,16 @@ func printUsage() {
 	fmt.Println("10 minutes and writes the output to <day>stats.csv")
 }
 
-func (s *Stats) Run(args []string) {
+func (s *Stats) Run(args []string) error {
 	for _, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			printUsage()
-			return
+			return nil
 		}
 	}
 	for {
 		if err := writeStats(); err != nil {
-			return
+			return err
 		}
 		time.Sleep(600 * time.Second)
 	}

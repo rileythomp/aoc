@@ -10,7 +10,7 @@ import (
 )
 
 type Program interface {
-	Run([]string)
+	Run(args []string) error
 }
 
 func printUsage() {
@@ -41,5 +41,7 @@ func main() {
 	}
 	if p, ok := progs[prog]; ok {
 		p.Run(args[1:])
+	} else {
+		printUsage()
 	}
 }
