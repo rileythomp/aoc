@@ -19,10 +19,10 @@ func (s *Stats) PrintUsage() {
 }
 
 func (s *Stats) Run(args []string) error {
-	_, ok := s.GetArgs(args)
-	if !ok {
+	if _, ok := s.GetArgs(args); !ok {
 		return nil
 	}
+
 	reqs := 0
 	for {
 		if reqs < 60 {
@@ -37,6 +37,7 @@ func (s *Stats) Run(args []string) error {
 			return err
 		}
 	}
+	
 	return nil
 }
 
@@ -66,10 +67,8 @@ func writeStats() error {
 			submissions := numspan[0]
 			date := time.Now().Format("02 Jan 06 03:04:05PM")
 			entry := date + ", " + submissions + "\n"
-			statsFile := fmt.Sprintf("%dstats.csv", day)
-			f, _ := os.OpenFile(statsFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModePerm)
-			defer f.Close()
-			if _, err = f.WriteString(entry); err != nil {
+			fileName := fmt.Sprintf("%dstats.csv", day)
+			if err := utils.WriteFile(statsFile, entry); err != nil {
 				return err
 			}
 		}

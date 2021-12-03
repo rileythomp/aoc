@@ -26,10 +26,10 @@ func (m *Mkday) Run(args []string) error {
 	}
 	year, day := args[0], args[1]
 
-	err := m.createFiles(year, day)
-	if err != nil {
+	if err := m.createFiles(year, day); err != nil {
 		return err
 	}
+
 	path := fmt.Sprintf("./solutions/%s/day%s/problem.html", year, day)
 	if err = utils.OpenFile(path); err != nil {
 		return err
@@ -68,8 +68,7 @@ func (m *Mkday) GetArgs(args []string) ([]string, bool) {
 func (m *Mkday) createFiles(year, day string) error {
 	fmt.Printf("Downloading %s day %s...\n", year, day)
 	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
-	err := os.MkdirAll(path, os.ModePerm)
-	if err != nil {
+	if err := os.MkdirAll(path, os.ModePerm); err != nil {
 		fmt.Printf("Error creating %s: %s", path, err.Error())
 		return err
 	}
@@ -97,8 +96,8 @@ func (m *Mkday) createFiles(year, day string) error {
 	}
 	for _, file := range files {
 		file.Content = utils.AddCss(file.Content)
-		err = os.WriteFile(fmt.Sprintf("%s/%s", path, file.Name), file.Content, os.ModePerm)
-		if err != nil {
+		fileName := fmt.Sprintf("%s/%s", path, file.Name)
+		if err = utils.WriteFile(fileName, fileContent); err != nil {
 			fmt.Printf("Error creating %s/%s\n", path, file.Name)
 			return err
 		}

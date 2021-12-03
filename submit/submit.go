@@ -20,7 +20,7 @@ func (s *Submit) PrintUsage() {
 	fmt.Println("Defaults:")
 	fmt.Println("level: 1")
 	fmt.Println("input: test.txt")
-	fmt.Println("day:  current year")
+	fmt.Println("day:   current year")
 	fmt.Println("year:  current day")
 }
 
@@ -41,8 +41,7 @@ func (s *Submit) Run(args []string) error {
 		return err
 	}
 
-	err = createSubmissionFile(resp, year, day)
-	if err != nil {
+	if err = createSubmissionFile(resp, year, day); err != nil {
 		return err
 	}
 
@@ -107,7 +106,6 @@ func getAnswer(input, level, year, day string) (string, error) {
 }
 
 func submitAnswer(ans, level, year, day string) ([]byte, error) {
-	var err error
 	form := url.Values{}
 	form.Add("level", level)
 	form.Add("answer", ans)
@@ -125,9 +123,9 @@ func createSubmissionFile(resp []byte, year, day string) error {
 	submission := "submission.html"
 	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
 	resp = utils.AddCss(resp)
-	err := os.WriteFile(fmt.Sprintf("%s/%s", path, submission), resp, os.ModePerm)
-	if err != nil {
-		fmt.Printf("Error creating %s/%s\n", path, submission)
+	fileName := fmt.Sprintf("%s/%s", path, submission)
+	if err := utils.WriteFile(name, resp); err != nil {
+		fmt.Printf("Error creating %s\n", fileName)
 		return err
 	}
 	fmt.Printf("Created %s/%s\n", path, submission)
