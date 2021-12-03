@@ -11,6 +11,10 @@ import (
 
 func printUsage() {
 	fmt.Println("Advent of Code CLI")
+	fmt.Println("Usage:")
+	fmt.Println("./aoc mkday <program>")
+	fmt.Println("<program> can be one of submit, mkday or submissions")
+	fmt.Println("Use -h or --help for instructions.")
 }
 
 func main() {
@@ -27,7 +31,7 @@ func main() {
 	}
 
 	if prog == "submissions" {
-		stats.RunSubmissions()
+		stats.RunSubmissions(args[1:])
 	} else if prog == "mkday" {
 		mkday.RunMkday(args[1:])
 	} else if prog == "submit" {

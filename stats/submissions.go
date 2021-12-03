@@ -9,7 +9,20 @@ import (
 	"github.com/rileythomp/aoc/utils"
 )
 
-func RunSubmissions() {
+func printUsage() {
+	fmt.Println("Usage:")
+	fmt.Println("./aoc submissions")
+	fmt.Println("Checks the number of solutions for the current day every")
+	fmt.Println("10 minutes and writes the output to <day>stats.csv")
+}
+
+func RunSubmissions(args []string) {
+	for _, arg := range args {
+		if arg == "-h" || arg == "--help" {
+			printUsage()
+			return
+		}
+	}
 	for {
 		if err := writeStats(); err != nil {
 			return

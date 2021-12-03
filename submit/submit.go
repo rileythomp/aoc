@@ -3,15 +3,13 @@ package submit
 import (
 	"errors"
 	"fmt"
-	"io"
-	"io/ioutil"
-	"net/http"
-	"net/http/cookiejar"
 	"net/url"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/rileythomp/aoc/utils"
 )
 
 type SubmitArgs struct {
@@ -53,17 +51,6 @@ func RunSubmit(args []string) {
 	}
 
 	_ = openResult(sa.Year, sa.Day)
-}
-
-func openResult(year, day string) error {
-	filePath := fmt.Sprintf("./%s/day%s/submission.html", year, day)
-	cmd := exec.Command("open", filePath)
-	_, err := cmd.Output()
-	if err != nil {
-		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
-		return err
-	}
-	return nil
 }
 
 func getArgs(args []string) (SubmitArgs, bool) {
@@ -128,50 +115,35 @@ func submitAnswer(ans, level, year, day string) ([]byte, error) {
 	form := url.Values{}
 	form.Add("level", level)
 	form.Add("answer", ans)
-	client := &http.Client{}
-	client.Jar, err = cookiejar.New(nil)
-	if err != nil {
-		fmt.Printf("Error creating cookies: %s\n", err)
-		return nil, err
-	}
 	uri := fmt.Sprintf("https://adventofcode.com/%s/day/%s/answer", year, day)
-	urlObj, err := url.ParseRequestURI(uri)
+	body, err := utils.PostAoC(uri, form)
 	if err != nil {
-		fmt.Printf("There was an parsing the uri %s: %s\n", uri, err.Error())
+		fmt.Println("There was an error submitting the answer")
 		return nil, err
 	}
-	client.Jar.SetCookies(urlObj, []*http.Cookie{
-		{Name: "session", Value: os.Getenv("AOC_COOKIE")},
-	})
-	req, err := http.NewRequest("POST", uri, strings.NewReader(form.Encode()))
-	if err != nil {
-		fmt.Printf("There was an error creating the POST request for submission to the uri %s: %s\n", uri, err.Error())
-		return nil, err
-	}
-	fmt.Printf("Submitting %s for year %s day %s level %s\n", ans, year, day, level)
-	resp, err := client.Do(req)
-	if err != nil {
-		fmt.Printf("There was an error submitting the answer %s for year %s day %s: %s\n", ans, year, day, err.Error())
-		return nil, err
-	}
-	body, err := ioutil.ReadAll(io.LimitReader(resp.Body, 1048576))
-	if err != nil {
-		fmt.Printf("There was an error reading the submission response: %s\n", err.Error())
-		return nil, err
-	}
-	defer resp.Body.Close()
 	return body, nil
 }
 
 func createSubmissionFile(resp []byte, year, day string) error {
 	submission := "submission.html"
 	path := fmt.Sprintf("./%s/day%s", year, day)
-	resp = []byte(strings.Replace(string(resp), "/static/style.css?26", "https://adventofcode.com/static/style.css", 1))
+	resp = utils.AddCss(resp)
 	err := os.WriteFile(fmt.Sprintf("%s/%s", path, submission), resp, os.ModePerm)
 	if err != nil {
 		fmt.Printf("Error creating %s/%s\n", path, submission)
 		return err
 	}
 	fmt.Printf("Created %s/%s\n", path, submission)
+	return nil
+}
+
+func openResult(year, day string) error {
+	filePath := fmt.Sprintf("./%s/day%s/submission.html", year, day)
+	cmd := exec.Command("open", filePath)
+	_, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
+		return err
+	}
 	return nil
 }

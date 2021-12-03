@@ -34,17 +34,6 @@ func RunMkday(args []string) {
 	_ = openProblem(year, day)
 }
 
-func openProblem(year, day string) error {
-	filePath := fmt.Sprintf("./%s/day%s/problem.html", year, day)
-	cmd := exec.Command("open", filePath)
-	_, err := cmd.Output()
-	if err != nil {
-		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
-		return err
-	}
-	return nil
-}
-
 func getYearAndDay(args []string) (string, string, bool) {
 	y, _, d := time.Now().Date()
 	var (
@@ -92,6 +81,10 @@ func createFiles(year, day string) error {
 	if err != nil {
 		return err
 	}
+	boilerplate, err := getBoilerplate()
+	if err != nil {
+		return err
+	}
 	files := []struct {
 		Name    string
 		Content []byte
@@ -99,7 +92,7 @@ func createFiles(year, day string) error {
 		{Name: "problem.html", Content: problem},
 		{Name: "input.txt", Content: input},
 		{Name: "test.txt", Content: []byte{}},
-		{Name: "main.go", Content: getBoilerplate()},
+		{Name: "main.go", Content: boilerplate},
 	}
 	for _, file := range files {
 		file.Content = []byte(strings.Replace(string(file.Content), "/static/style.css?26", "https://adventofcode.com/static/style.css", 1))
@@ -113,7 +106,21 @@ func createFiles(year, day string) error {
 	return nil
 }
 
-func getBoilerplate() []byte {
-	boilerplate, _ := ioutil.ReadFile("gitub.com/rileythomp/aoc/mkday/boilerplate.txt")
-	return boilerplate
+func getBoilerplate() ([]byte, error) {
+	boilerplate, err := ioutil.ReadFile("./mkday/boilerplate.txt")
+	if err != nil {
+		return nil, err
+	}
+	return boilerplate, nil
+}
+
+func openProblem(year, day string) error {
+	filePath := fmt.Sprintf("./%s/day%s/problem.html", year, day)
+	cmd := exec.Command("open", filePath)
+	_, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
+		return err
+	}
+	return nil
 }
