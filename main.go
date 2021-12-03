@@ -11,13 +11,15 @@ import (
 
 type Program interface {
 	Run(args []string) error
+	PrintUsage()
+	GetArgs(args []string) ([]string, bool)
 }
 
 func printUsage() {
 	fmt.Println("Advent of Code CLI")
 	fmt.Println("Usage:")
-	fmt.Println("./aoc mkday <program>")
-	fmt.Println("<program> can be one of submit, mkday or submissions")
+	fmt.Println("./aoc <program> [arguments]")
+	fmt.Println("<program> can be one of submit, mkday or stats")
 	fmt.Println("Use -h or --help for instructions.")
 }
 
@@ -35,12 +37,15 @@ func main() {
 	}
 
 	progs := map[string]Program{
-		"submissions": &stats.Stats{},
-		"mkday":       &mkday.Mkday{},
-		"submit":      &submit.Submit{},
+		"stats":  &stats.Stats{},
+		"mkday":  &mkday.Mkday{},
+		"submit": &submit.Submit{},
 	}
 	if p, ok := progs[prog]; ok {
-		p.Run(args[1:])
+		if err := p.Run(args[1:]); err != nil {
+			p.PrintUsage()
+			return
+		}
 	} else {
 		printUsage()
 	}

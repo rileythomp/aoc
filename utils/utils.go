@@ -1,12 +1,14 @@
 package utils
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -63,4 +65,22 @@ func PostAoC(uri string, form url.Values) ([]byte, error) {
 		return nil, err
 	}
 	return body, nil
+}
+
+func GetFile(path string) ([]byte, error) {
+	boilerplate, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	return boilerplate, nil
+}
+
+func OpenFile(path string) error {
+	cmd := exec.Command("open", path)
+	_, err := cmd.Output()
+	if err != nil {
+		fmt.Printf("There was an error opening %s: %s\n", path, err.Error())
+		return err
+	}
+	return nil
 }

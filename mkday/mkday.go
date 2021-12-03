@@ -2,9 +2,7 @@ package mkday
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
-	"os/exec"
 	"strings"
 	"time"
 
@@ -13,7 +11,7 @@ import (
 
 type Mkday struct{}
 
-func printUsage() {
+func (m *Mkday) PrintUsage() {
 	fmt.Println("Usage:")
 	fmt.Println("./aoc mkday <day> <year>")
 	fmt.Println("Defaults:")
@@ -23,24 +21,24 @@ func printUsage() {
 }
 
 func (m *Mkday) Run(args []string) error {
-	year, day, ok := getYearAndDay(args)
+	args, ok := m.GetArgs(args)
 	if !ok {
-		return fmt.Errorf("could not get year and day")
+		return nil
 	}
-
-	err := createFiles(year, day)
+	year, day := args[0], args[1]
+	err := m.createFiles(year, day)
 	if err != nil {
 		return err
 	}
-
-	if err = openProblem(year, day); err != nil {
+	path := fmt.Sprintf("./solutions/%s/day%s/problem.html", year, day)
+	if err = utils.OpenFile(path); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func getYearAndDay(args []string) (string, string, bool) {
+func (m *Mkday) GetArgs(args []string) ([]string, bool) {
 	y, _, d := time.Now().Date()
 	var (
 		year = fmt.Sprint(y)
@@ -48,8 +46,8 @@ func getYearAndDay(args []string) (string, string, bool) {
 	)
 	for i, arg := range args {
 		if arg == "-h" || arg == "--help" {
-			printUsage()
-			return "", "", false
+			m.PrintUsage()
+			return []string{}, false
 		}
 		if i == 0 {
 			day = arg
@@ -67,10 +65,10 @@ func getYearAndDay(args []string) (string, string, bool) {
 		}
 		fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
 	}
-	return year, day, true
+	return []string{year, day}, true
 }
 
-func createFiles(year, day string) error {
+func (m *Mkday) createFiles(year, day string) error {
 	fmt.Printf("Downloading %s day %s...\n", year, day)
 	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
 	err := os.MkdirAll(path, os.ModePerm)
@@ -87,7 +85,7 @@ func createFiles(year, day string) error {
 	if err != nil {
 		return err
 	}
-	boilerplate, err := getBoilerplate()
+	boilerplate, err := utils.GetFile("./mkday/boilerplate.txt")
 	if err != nil {
 		return err
 	}
@@ -108,25 +106,6 @@ func createFiles(year, day string) error {
 			return err
 		}
 		fmt.Printf("Created %s/%s\n", path, file.Name)
-	}
-	return nil
-}
-
-func getBoilerplate() ([]byte, error) {
-	boilerplate, err := ioutil.ReadFile("./mkday/boilerplate.txt")
-	if err != nil {
-		return nil, err
-	}
-	return boilerplate, nil
-}
-
-func openProblem(year, day string) error {
-	filePath := fmt.Sprintf("./solutions/%s/day%s/problem.html", year, day)
-	cmd := exec.Command("open", filePath)
-	_, err := cmd.Output()
-	if err != nil {
-		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
-		return err
 	}
 	return nil
 }

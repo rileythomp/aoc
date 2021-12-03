@@ -21,7 +21,7 @@ type SubmitArgs struct {
 	Day   string
 }
 
-func printUsage() {
+func (s *Submit) PrintUsage() {
 	fmt.Println("Usage:")
 	fmt.Println("./aoc submit <level> <input> <day> <year>")
 	fmt.Println("Defaults:")
@@ -32,75 +32,71 @@ func printUsage() {
 }
 
 func (s *Submit) Run(args []string) error {
-	sa, ok := getArgs(args)
+	args, ok := s.GetArgs(args)
 	if !ok {
-		return fmt.Errorf("could not get args")
+		return nil
 	}
-
-	ans, err := getAnswer(sa.Input, sa.Level, sa.Year, sa.Day)
+	level, input, day, year := args[0], args[1], args[2], args[3]
+	ans, err := getAnswer(input, level, year, day)
 	if err != nil {
 		return err
 	}
 
-	resp, err := submitAnswer(ans, sa.Level, sa.Year, sa.Day)
+	resp, err := submitAnswer(ans, level, year, day)
 	if err != nil {
 		return err
 	}
 
-	err = createSubmissionFile(resp, sa.Year, sa.Day)
+	err = createSubmissionFile(resp, year, day)
 	if err != nil {
 		return err
 	}
 
-	if err = openResult(sa.Year, sa.Day); err != nil {
+	path := fmt.Sprintf("./solutions/%s/day%s/submission.html", year, day)
+	if err = utils.OpenFile(path); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func getArgs(args []string) (SubmitArgs, bool) {
+func (s *Submit) GetArgs(args []string) ([]string, bool) {
 	y, _, d := time.Now().Date()
-	sa := SubmitArgs{
-		Level: "1",
-		Input: "input.txt",
-		Year:  fmt.Sprint(y),
-		Day:   fmt.Sprint(d),
-	}
+	level, input, year, day := "1", "input.txt", fmt.Sprint(y), fmt.Sprint(d)
 	for i, arg := range args {
 		if arg == "-h" || arg == "--help" {
-			printUsage()
-			return SubmitArgs{}, false
+			s.PrintUsage()
+			return []string{}, false
 		}
 		if i == 0 && (arg == "1" || arg == "2") {
-			sa.Level = arg
+			level = arg
 		} else if i == 0 {
 			fmt.Println("level must be 1 or 2")
-			return SubmitArgs{}, false
+			return []string{}, false
 		} else if i == 1 {
-			sa.Input = arg
+			input = arg
 		} else if i == 2 {
-			sa.Day = arg
+			day = arg
 		} else if i == 3 {
-			sa.Year = arg
+			year = arg
 		}
 	}
-	path := fmt.Sprintf("./%s/day%s", sa.Year, sa.Day)
-	inputPath := path + "/" + sa.Input
+	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
+	inputPath := path + "/" + input
 	_, err := os.Stat(inputPath)
 	if errors.Is(err, os.ErrNotExist) {
 		fmt.Printf("Input file %s does not exist\n", inputPath)
-		return SubmitArgs{}, false
+		return []string{}, false
 	} else if err != nil {
 		fmt.Printf("Unexpected error with input file %s: %s\n", inputPath, err.Error())
-		return SubmitArgs{}, false
+		return []string{}, false
 	}
-	return sa, true
+	return []string{level, input, day, year}, true
 }
 
 func getAnswer(input, level, year, day string) (string, error) {
 	cmd := exec.Command("go", "run", "main.go", input, level)
-	dir := fmt.Sprintf("./%s/day%s/", year, day)
+	dir := fmt.Sprintf("./solutions/%s/day%s/", year, day)
 	cmd.Dir = dir
 	output, err := cmd.Output()
 	if err != nil {
@@ -121,6 +117,7 @@ func submitAnswer(ans, level, year, day string) ([]byte, error) {
 	form := url.Values{}
 	form.Add("level", level)
 	form.Add("answer", ans)
+	fmt.Printf("Submitting %s for day %s %s\n", ans, day, year)
 	uri := fmt.Sprintf("https://adventofcode.com/%s/day/%s/answer", year, day)
 	body, err := utils.PostAoC(uri, form)
 	if err != nil {
@@ -132,7 +129,7 @@ func submitAnswer(ans, level, year, day string) ([]byte, error) {
 
 func createSubmissionFile(resp []byte, year, day string) error {
 	submission := "submission.html"
-	path := fmt.Sprintf("./%s/day%s", year, day)
+	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
 	resp = utils.AddCss(resp)
 	err := os.WriteFile(fmt.Sprintf("%s/%s", path, submission), resp, os.ModePerm)
 	if err != nil {
@@ -140,16 +137,5 @@ func createSubmissionFile(resp []byte, year, day string) error {
 		return err
 	}
 	fmt.Printf("Created %s/%s\n", path, submission)
-	return nil
-}
-
-func openResult(year, day string) error {
-	filePath := fmt.Sprintf("./%s/day%s/submission.html", year, day)
-	cmd := exec.Command("open", filePath)
-	_, err := cmd.Output()
-	if err != nil {
-		fmt.Printf("There was an error opening %s: %s\n", filePath, err.Error())
-		return err
-	}
 	return nil
 }
