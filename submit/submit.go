@@ -14,13 +14,6 @@ import (
 
 type Submit struct{}
 
-type SubmitArgs struct {
-	Level string
-	Input string
-	Year  string
-	Day   string
-}
-
 func (s *Submit) PrintUsage() {
 	fmt.Println("Usage:")
 	fmt.Println("./aoc submit <level> <input> <day> <year>")
@@ -37,6 +30,7 @@ func (s *Submit) Run(args []string) error {
 		return nil
 	}
 	level, input, day, year := args[0], args[1], args[2], args[3]
+
 	ans, err := getAnswer(input, level, year, day)
 	if err != nil {
 		return err

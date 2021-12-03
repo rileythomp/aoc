@@ -3,7 +3,6 @@ package mkday
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/rileythomp/aoc/utils"
@@ -26,6 +25,7 @@ func (m *Mkday) Run(args []string) error {
 		return nil
 	}
 	year, day := args[0], args[1]
+
 	err := m.createFiles(year, day)
 	if err != nil {
 		return err
@@ -40,10 +40,7 @@ func (m *Mkday) Run(args []string) error {
 
 func (m *Mkday) GetArgs(args []string) ([]string, bool) {
 	y, _, d := time.Now().Date()
-	var (
-		year = fmt.Sprint(y)
-		day  = fmt.Sprint(d + 1)
-	)
+	year, day := fmt.Sprint(y), fmt.Sprint(d+1)
 	for i, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			m.PrintUsage()
@@ -99,7 +96,7 @@ func (m *Mkday) createFiles(year, day string) error {
 		{Name: "main.go", Content: boilerplate},
 	}
 	for _, file := range files {
-		file.Content = []byte(strings.Replace(string(file.Content), "/static/style.css?26", "https://adventofcode.com/static/style.css", 1))
+		file.Content = utils.AddCss(file.Content)
 		err = os.WriteFile(fmt.Sprintf("%s/%s", path, file.Name), file.Content, os.ModePerm)
 		if err != nil {
 			fmt.Printf("Error creating %s/%s\n", path, file.Name)
