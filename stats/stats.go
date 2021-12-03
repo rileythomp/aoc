@@ -2,7 +2,6 @@ package stats
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"time"
 
@@ -37,7 +36,7 @@ func (s *Stats) Run(args []string) error {
 			return err
 		}
 	}
-	
+
 	return nil
 }
 
@@ -67,8 +66,8 @@ func writeStats() error {
 			submissions := numspan[0]
 			date := time.Now().Format("02 Jan 06 03:04:05PM")
 			entry := date + ", " + submissions + "\n"
-			fileName := fmt.Sprintf("%dstats.csv", day)
-			if err := utils.WriteFile(statsFile, entry); err != nil {
+			name := fmt.Sprintf("%dstats.csv", day)
+			if err := utils.WriteFileString(name, entry); err != nil {
 				return err
 			}
 		}

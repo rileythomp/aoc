@@ -44,8 +44,11 @@ func GetAoC(uri string) ([]byte, error) {
 }
 
 func PostAoC(uri string, form url.Values) ([]byte, error) {
-	client := &http.Client{}
-	client.Jar, err := cookiejar.New(nil)
+	var (
+		client = &http.Client{}
+		err    error
+	)
+	client.Jar, err = cookiejar.New(nil)
 	if err != nil {
 		return nil, err
 	}
@@ -71,17 +74,17 @@ func PostAoC(uri string, form url.Values) ([]byte, error) {
 	return body, nil
 }
 
-func WriteFile(name string, content []byte) error {
-	if err = os.WriteFile(name, content, os.ModePerm); err != nil {
+func WriteFileBytes(name string, content []byte) error {
+	if err := os.WriteFile(name, content, os.ModePerm); err != nil {
 		return err
 	}
 	return nil
 }
 
-func WriteFile(name, str string) error {
+func WriteFileString(name, str string) error {
 	f, _ := os.OpenFile(name, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModePerm)
 	defer f.Close()
-	if _, err = f.WriteString(str); err != nil {
+	if _, err := f.WriteString(str); err != nil {
 		return err
 	}
 	return nil

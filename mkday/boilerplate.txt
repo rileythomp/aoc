@@ -16,12 +16,12 @@ func part2(strs []string) int {
 }
 
 func main() {
-	level, fileName := getArgs()
-	if level == "" || fileName == "" {
+	level, name := getArgs()
+	if level == "" || name == "" {
 		return
 	}
 
-	file, _ := os.Open(fileName)
+	file, _ := os.Open(name)
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 
@@ -45,7 +45,7 @@ func getArgs() (string, string) {
 	args := os.Args[1:]
 	var (
 		level    = "1"
-		fileName = "input.txt"
+		name = "input.txt"
 	)
 	for i, arg := range args {
 		if i == 0 && (level == "1" || level == "2") {
@@ -54,8 +54,8 @@ func getArgs() (string, string) {
 			fmt.Printf("Level must be 1 or 2, got %s\n", arg)
 			return "", ""
 		} else if i == 1 {
-			fileName = arg
+			name = arg
 		}
 	}
-	return level, fileName
+	return level, name
 }

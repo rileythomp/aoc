@@ -123,9 +123,9 @@ func createSubmissionFile(resp []byte, year, day string) error {
 	submission := "submission.html"
 	path := fmt.Sprintf("./solutions/%s/day%s", year, day)
 	resp = utils.AddCss(resp)
-	fileName := fmt.Sprintf("%s/%s", path, submission)
-	if err := utils.WriteFile(name, resp); err != nil {
-		fmt.Printf("Error creating %s\n", fileName)
+	name := fmt.Sprintf("%s/%s", path, submission)
+	if err := utils.WriteFileBytes(name, resp); err != nil {
+		fmt.Printf("Error creating %s\n", name)
 		return err
 	}
 	fmt.Printf("Created %s/%s\n", path, submission)

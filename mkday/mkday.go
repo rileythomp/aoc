@@ -31,7 +31,7 @@ func (m *Mkday) Run(args []string) error {
 	}
 
 	path := fmt.Sprintf("./solutions/%s/day%s/problem.html", year, day)
-	if err = utils.OpenFile(path); err != nil {
+	if err := utils.OpenFile(path); err != nil {
 		return err
 	}
 
@@ -96,9 +96,9 @@ func (m *Mkday) createFiles(year, day string) error {
 	}
 	for _, file := range files {
 		file.Content = utils.AddCss(file.Content)
-		fileName := fmt.Sprintf("%s/%s", path, file.Name)
-		if err = utils.WriteFile(fileName, fileContent); err != nil {
-			fmt.Printf("Error creating %s/%s\n", path, file.Name)
+		name := fmt.Sprintf("%s/%s", path, file.Name)
+		if err = utils.WriteFileBytes(name, file.Content); err != nil {
+			fmt.Printf("Error creating %s\n", name)
 			return err
 		}
 		fmt.Printf("Created %s/%s\n", path, file.Name)
