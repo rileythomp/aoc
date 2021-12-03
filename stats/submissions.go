@@ -25,12 +25,21 @@ func (s *Stats) Run(args []string) error {
 			return nil
 		}
 	}
+	reqs := 0
 	for {
+		if reqs < 60 {
+			time.Sleep(time.Minute)
+		} else if reqs-60 < 24 {
+			time.Sleep(time.Hour)
+		} else {
+			break
+		}
+		reqs++
 		if err := writeStats(); err != nil {
 			return err
 		}
-		time.Sleep(600 * time.Second)
 	}
+	return nil
 }
 
 func writeStats() error {
