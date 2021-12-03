@@ -9,6 +9,10 @@ import (
 	"github.com/rileythomp/aoc/submit"
 )
 
+type Program interface {
+	Run([]string)
+}
+
 func printUsage() {
 	fmt.Println("Advent of Code CLI")
 	fmt.Println("Usage:")
@@ -30,11 +34,12 @@ func main() {
 		}
 	}
 
-	if prog == "submissions" {
-		stats.RunSubmissions(args[1:])
-	} else if prog == "mkday" {
-		mkday.RunMkday(args[1:])
-	} else if prog == "submit" {
-		submit.RunSubmit(args[1:])
+	progs := map[string]Program{
+		"submissions": &stats.Stats{},
+		"mkday":       &mkday.Mkday{},
+		"submit":      &submit.Submit{},
+	}
+	if p, ok := progs[prog]; ok {
+		p.Run(args[1:])
 	}
 }

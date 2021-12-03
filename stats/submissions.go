@@ -9,6 +9,8 @@ import (
 	"github.com/rileythomp/aoc/utils"
 )
 
+type Stats struct{}
+
 func printUsage() {
 	fmt.Println("Usage:")
 	fmt.Println("./aoc submissions")
@@ -16,7 +18,7 @@ func printUsage() {
 	fmt.Println("10 minutes and writes the output to <day>stats.csv")
 }
 
-func RunSubmissions(args []string) {
+func (s *Stats) Run(args []string) {
 	for _, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			printUsage()

@@ -12,6 +12,8 @@ import (
 	"github.com/rileythomp/aoc/utils"
 )
 
+type Submit struct{}
+
 type SubmitArgs struct {
 	Level string
 	Input string
@@ -29,7 +31,7 @@ func printUsage() {
 	fmt.Println("year:  current day")
 }
 
-func RunSubmit(args []string) {
+func (s *Submit) Run(args []string) {
 	sa, ok := getArgs(args)
 	if !ok {
 		return

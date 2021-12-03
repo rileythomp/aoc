@@ -11,6 +11,8 @@ import (
 	"github.com/rileythomp/aoc/utils"
 )
 
+type Mkday struct{}
+
 func printUsage() {
 	fmt.Println("Usage:")
 	fmt.Println("./aoc mkday <day> <year>")
@@ -20,7 +22,7 @@ func printUsage() {
 	fmt.Println("So if no arguments are passed, it will wait until the next puzzle is released at midnight")
 }
 
-func RunMkday(args []string) {
+func (m *Mkday) Run(args []string) {
 	year, day, ok := getYearAndDay(args)
 	if !ok {
 		return
