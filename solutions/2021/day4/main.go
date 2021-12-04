@@ -84,7 +84,7 @@ func part1(strs []string) int {
 			for i, row := range board {
 				for j, val := range row {
 					if val == call {
-						boards[b][i][j] = (boards[b][i][j] + 1) * -1
+						boards[b][i][j] = -1
 					}
 					if isWinner(board) {
 						return boardScore(board) * call
@@ -118,7 +118,7 @@ func part2(strs []string) int {
 				nextboard := false
 				for j, val := range row {
 					if val == call {
-						boards[b][i][j] = (boards[b][i][j] + 1) * -1
+						boards[b][i][j] = -1
 					}
 					if isWinner(board) {
 						winners = append(winners, b)
