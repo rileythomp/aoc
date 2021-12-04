@@ -41,12 +41,12 @@ func (s *Submit) Run(args []string) error {
 		return err
 	}
 
-	if err = createSubmissionFile(resp, year, day); err != nil {
+	if err := createSubmissionFile(resp, year, day); err != nil {
 		return err
 	}
 
 	path := fmt.Sprintf("./solutions/%s/day%s/submission.html", year, day)
-	if err = utils.OpenFile(path); err != nil {
+	if err := utils.OpenFile(path); err != nil {
 		return err
 	}
 

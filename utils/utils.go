@@ -27,7 +27,10 @@ func GetAoC(uri string) ([]byte, error) {
 		return nil, err
 	}
 	client := &http.Client{}
-	client.Jar, _ = cookiejar.New(nil)
+	client.Jar, err = cookiejar.New(nil)
+	if err != nil {
+		return nil, err
+	}
 	client.Jar.SetCookies(urlObj, []*http.Cookie{
 		{Name: "session", Value: os.Getenv("AOC_COOKIE")},
 	})
@@ -82,7 +85,10 @@ func WriteFileBytes(name string, content []byte) error {
 }
 
 func WriteFileString(name, str string) error {
-	f, _ := os.OpenFile(name, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModePerm)
+	f, err := os.OpenFile(name, os.O_APPEND|os.O_WRONLY|os.O_CREATE, os.ModePerm)
+	if err != nil {
+		return err
+	}
 	defer f.Close()
 	if _, err := f.WriteString(str); err != nil {
 		return err

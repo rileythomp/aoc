@@ -97,7 +97,7 @@ func (m *Mkday) createFiles(year, day string) error {
 	for _, file := range files {
 		file.Content = utils.AddCss(file.Content)
 		name := fmt.Sprintf("%s/%s", path, file.Name)
-		if err = utils.WriteFileBytes(name, file.Content); err != nil {
+		if err := utils.WriteFileBytes(name, file.Content); err != nil {
 			fmt.Printf("Error creating %s\n", name)
 			return err
 		}
