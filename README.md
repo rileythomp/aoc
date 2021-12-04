@@ -5,14 +5,12 @@ Advent of Code tools and solutions.
 NB: Must have environment variable `AOC_TOKEN` set to your AoC API session token.
 
 **Submission Statistics**\
-Running\
 `./aoc stats `\
 checks the number of correct submissions every minute for the first hour and then every hour for the rest of the day and writes the output to `<day>stats.csv`.
 
 ---
 
 **Automated Problem Fetching**\
-Running\
 `./aoc mkday <year> <day>`\
 will generate\
 `aoc/<year>/day<day>/problem.html`: The problem specification from the AoC API.\
@@ -31,7 +29,6 @@ So if a day is not given, it will wait until a new problem is released at midnig
 ---
 
 **Automated Submission**\
-Running\
 `./aoc submit <level> <year> <day>`\
 will automatically submit the output of\
 `go run main.go <level> input.txt`\
