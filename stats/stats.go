@@ -22,6 +22,16 @@ func (s *Stats) Run(args []string) error {
 		return nil
 	}
 
+	_, _, d := time.Now().Date()
+	fmt.Println("Waiting until problem is released at midnight...")
+	curDay, seconds := d, 0
+	for curDay < d+1 {
+		time.Sleep(time.Second)
+		seconds++
+		_, _, curDay = time.Now().Date()
+	}
+	fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
+
 	reqs := 0
 	for {
 		if reqs < 60 {
@@ -51,12 +61,12 @@ func (s *Stats) GetArgs(args []string) ([]string, bool) {
 }
 
 func writeStats() error {
-	uri := "https://adventofcode.com/2021/stats"
+	year, _, day := time.Now().Date()
+	uri := fmt.Sprintf("https://adventofcode.com/%s/stats", year)
 	statsData, err := utils.GetAoC(uri)
 	if err != nil {
 		return err
 	}
-	_, _, day := time.Now().Date()
 	html := string(statsData)
 	lines := strings.Split(html, "\n")
 	for _, line := range lines {
