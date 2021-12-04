@@ -12,13 +12,9 @@ func getRow(boardline string) []int {
 	nums := strings.Split(boardline, " ")
 	rets := []int{}
 	for _, num := range nums {
-		// ret, _ := strconv.Atoi(num)
-		if num == "" || num == " " || num == "\n" {
+		if num == "" {
 			continue
 		}
-		num = strings.Replace(num, " ", "", -1)
-		num = strings.Replace(num, "\n", "", -1)
-		num = strings.Replace(num, "\t", "", -1)
 		ret, _ := strconv.Atoi(num)
 		rets = append(rets, ret)
 	}
@@ -26,35 +22,17 @@ func getRow(boardline string) []int {
 }
 
 func isWinner(board [][]int) bool {
-	// check rows
-	for _, row := range board {
-		allNeg := true
-		for _, val := range row {
+	for i, row := range board {
+		horizWin, vertWin := true, true
+		for j, val := range row {
 			if val > -1 {
-				allNeg = false
+				horizWin = false
 			}
-		}
-		if allNeg {
-			return true
-		}
-	}
-	// check cols
-	// for i := 0; i < 6; i++ {
-	// 	allNeg := true
-	// 	for j := 0; j < 5; j++ {
-	// 		if board[j][i] > -1 {
-	// 			allNeg = false
-	// 		}
-	// 	}
-	// }
-	for i, col := range board {
-		allNeg := true
-		for j := range col {
 			if board[j][i] > -1 {
-				allNeg = false
+				vertWin = false
 			}
 		}
-		if allNeg {
+		if horizWin || vertWin {
 			return true
 		}
 	}
@@ -73,23 +51,20 @@ func boardScore(board [][]int) int {
 	return score
 }
 
-func part1(strs []string) int {
-	calls := strs[0]
-	_ = calls
-	numsCalled := []int{}
-	callnums := strings.Split(calls, ",")
-	for _, c := range callnums {
-		x, _ := strconv.Atoi(c)
-		numsCalled = append(numsCalled, x)
+func getBoardAndCalls(strs []string) ([][][]int, []int) {
+	input := strs[0]
+	nums := strings.Split(input, ",")
+	calls := []int{}
+	for _, c := range nums {
+		num, _ := strconv.Atoi(c)
+		calls = append(calls, num)
 	}
-
 	boardlines := strs[1:]
-	counter := 0
 	boards := [][][]int{}
 	curBoard := [][]int{}
+	counter := 0
 	for _, boardline := range boardlines {
 		if boardline != "" {
-			// fmt.Println(boardline)
 			row := getRow(boardline)
 			curBoard = append(curBoard, row)
 			counter = (counter + 1) % 5
@@ -99,7 +74,11 @@ func part1(strs []string) int {
 			}
 		}
 	}
+	return boards, calls
+}
 
+func part1(strs []string) int {
+	boards, numsCalled := getBoardAndCalls(strs)
 	for _, call := range numsCalled {
 		for b, board := range boards {
 			for i, row := range board {
@@ -107,7 +86,6 @@ func part1(strs []string) int {
 					if val == call {
 						boards[b][i][j] = (boards[b][i][j] + 1) * -1
 					}
-					// check board, return board score * call if winner
 					if isWinner(board) {
 						return boardScore(board) * call
 					}
@@ -115,71 +93,37 @@ func part1(strs []string) int {
 			}
 		}
 	}
-
 	return 0
 }
 
-func part2(strs []string) int {
-	calls := strs[0]
-	_ = calls
-	numsCalled := []int{}
-	callnums := strings.Split(calls, ",")
-	for _, c := range callnums {
-		x, _ := strconv.Atoi(c)
-		numsCalled = append(numsCalled, x)
-	}
-
-	boardlines := strs[1:]
-	counter := 0
-	boards := [][][]int{}
-	curBoard := [][]int{}
-	for _, boardline := range boardlines {
-		if boardline != "" {
-			// fmt.Println(boardline)
-			row := getRow(boardline)
-			curBoard = append(curBoard, row)
-			counter = (counter + 1) % 5
-			if counter == 0 {
-				boards = append(boards, curBoard)
-				curBoard = [][]int{}
-			}
+func contains(nums []int, num int) bool {
+	for i := range nums {
+		if nums[i] == num {
+			return true
 		}
 	}
+	return false
+}
 
-	// have boards here
+func part2(strs []string) int {
+	boards, numsCalled := getBoardAndCalls(strs)
 	lastScore := 0
 	winners := []int{}
 	for _, call := range numsCalled {
 		for b, board := range boards {
-			// skip if b in winners
-			skip := false
-			for _, w := range winners {
-				if b == w {
-					skip = true
-				}
-			}
-			if skip {
+			if contains(winners, b) {
 				continue
 			}
-			nextboard := false
 			for i, row := range board {
+				nextboard := false
 				for j, val := range row {
 					if val == call {
 						boards[b][i][j] = (boards[b][i][j] + 1) * -1
 					}
-					// check board, return board score * call if winner
 					if isWinner(board) {
-						fmt.Printf("done board %d with %d\n", b, call)
 						winners = append(winners, b)
-						fmt.Println(winners)
 						lastScore = boardScore(board) * call
 						nextboard = true
-						if len(winners) == len(boards) {
-							fmt.Println(board)
-							fmt.Printf("Winning score %d, %d, %d\n", boardScore(board)*call, boardScore(board), call)
-						}
-					}
-					if nextboard {
 						break
 					}
 				}
@@ -189,7 +133,6 @@ func part2(strs []string) int {
 			}
 		}
 	}
-	fmt.Println(winners)
 	return lastScore
 }
 
