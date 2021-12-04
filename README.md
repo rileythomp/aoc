@@ -10,7 +10,7 @@ Basic tests can be ran with `$ ./runtests.sh`
 NB: Must have environment variable `AOC_TOKEN` set to your AoC API session token.
 
 **Submission Statistics**\
-`./aoc stats `\
+`$ ./aoc stats `\
 checks the number of correct submissions every minute for the first hour and then every hour for the rest of the day and writes the output to `<day>stats.csv`.
 
 ---
