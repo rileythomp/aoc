@@ -43,6 +43,7 @@ func main() {
 	}
 	if p, ok := progs[prog]; ok {
 		if err := p.Run(args[1:]); err != nil {
+			fmt.Println(err)
 			p.PrintUsage()
 		}
 	} else {

@@ -62,7 +62,7 @@ func (s *Stats) GetArgs(args []string) ([]string, bool) {
 
 func writeStats() error {
 	year, _, day := time.Now().Date()
-	uri := fmt.Sprintf("https://adventofcode.com/%s/stats", year)
+	uri := fmt.Sprintf("https://adventofcode.com/%d/stats", year)
 	statsData, err := utils.GetAoC(uri)
 	if err != nil {
 		return err
@@ -72,6 +72,9 @@ func writeStats() error {
 	for _, line := range lines {
 		if strings.Contains(line, fmt.Sprintf(" %d ", day)) {
 			parts := strings.Split(line, " ")
+			if len(parts) < 7 {
+				return fmt.Errorf("unexpected response from %s: %s", uri, line)
+			}
 			numspan := strings.Split(parts[6], "<")
 			submissions := numspan[0]
 			date := time.Now().Format("02 Jan 06 03:04:05PM")
