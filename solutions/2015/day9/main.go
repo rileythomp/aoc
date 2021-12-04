@@ -136,8 +136,71 @@ func initGraph(strs []string) map[string]*Node {
 	return graph
 }
 
+func contains(strs []string, str string) bool {
+	for i := range strs {
+		if strs[i] == str {
+			return true
+		}
+	}
+	return false
+}
+
+func getNodes(graph map[string]*Node) []string {
+	nodes := make([]string, len(graph))
+	i := 0
+	for name := range graph {
+		nodes[i] = name
+		i++
+	}
+	return nodes
+}
+
 func part1(strs []string) int {
-	return findShortestPath(initGraph(strs))
+	// return findShortestPath(initGraph(strs))
+	graph := initGraph(strs)
+
+	nodes := getNodes(graph)
+
+	paths := []string{}
+
+	min := 0
+
+	// ints := []int{1, 2, 3, 4, 5}
+	// fmt.Println(ints[:len(ints)-1])
+
+	curPath, dist := "", 0
+	for {
+		// pick a random node
+		// check if its in the path
+		// check if its done and add to list of paths
+		// restart
+		break
+	}
+
+	for _, node := range nodes {
+		// pick someone from graph whos not in path already
+		curPath = node + " "
+		for _, node := range nodes {
+			if !strings.Contains(curPath, node) {
+				visited := strings.Fields(curPath)
+				last := visited[len(visited)-1]
+				dist += graph[last].Edges[node].Dist
+				curPath = curPath + node + " "
+				fmt.Println(curPath)
+				if len(visited)+1 == len(nodes) {
+					// we have a full path
+					fmt.Println(dist)
+					if dist < min {
+						min = dist
+					}
+					paths = append(paths, curPath)
+					return dist
+				}
+			}
+		}
+	}
+
+	return min
 }
 
 func part2(strs []string) int {
