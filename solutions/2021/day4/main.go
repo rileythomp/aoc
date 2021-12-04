@@ -8,6 +8,56 @@ import (
 	"strings"
 )
 
+func part1(strs []string) int {
+	boards, numsCalled := getBoardAndCalls(strs)
+	for _, call := range numsCalled {
+		for b, board := range boards {
+			for i, row := range board {
+				for j, val := range row {
+					if val == call {
+						boards[b][i][j] = -1
+					}
+					if isWinner(board) {
+						return boardScore(board) * call
+					}
+				}
+			}
+		}
+	}
+	return 0
+}
+
+func part2(strs []string) int {
+	boards, numsCalled := getBoardAndCalls(strs)
+	lastScore := 0
+	winners := []int{}
+	for _, call := range numsCalled {
+		for b, board := range boards {
+			if contains(winners, b) {
+				continue
+			}
+			for i, row := range board {
+				nextboard := false
+				for j, val := range row {
+					if val == call {
+						boards[b][i][j] = -1
+					}
+					if isWinner(board) {
+						winners = append(winners, b)
+						lastScore = boardScore(board) * call
+						nextboard = true
+						break
+					}
+				}
+				if nextboard {
+					break
+				}
+			}
+		}
+	}
+	return lastScore
+}
+
 func getRow(boardline string) []int {
 	nums := strings.Split(boardline, " ")
 	rets := []int{}
@@ -77,25 +127,6 @@ func getBoardAndCalls(strs []string) ([][][]int, []int) {
 	return boards, calls
 }
 
-func part1(strs []string) int {
-	boards, numsCalled := getBoardAndCalls(strs)
-	for _, call := range numsCalled {
-		for b, board := range boards {
-			for i, row := range board {
-				for j, val := range row {
-					if val == call {
-						boards[b][i][j] = -1
-					}
-					if isWinner(board) {
-						return boardScore(board) * call
-					}
-				}
-			}
-		}
-	}
-	return 0
-}
-
 func contains(nums []int, num int) bool {
 	for i := range nums {
 		if nums[i] == num {
@@ -103,37 +134,6 @@ func contains(nums []int, num int) bool {
 		}
 	}
 	return false
-}
-
-func part2(strs []string) int {
-	boards, numsCalled := getBoardAndCalls(strs)
-	lastScore := 0
-	winners := []int{}
-	for _, call := range numsCalled {
-		for b, board := range boards {
-			if contains(winners, b) {
-				continue
-			}
-			for i, row := range board {
-				nextboard := false
-				for j, val := range row {
-					if val == call {
-						boards[b][i][j] = -1
-					}
-					if isWinner(board) {
-						winners = append(winners, b)
-						lastScore = boardScore(board) * call
-						nextboard = true
-						break
-					}
-				}
-				if nextboard {
-					break
-				}
-			}
-		}
-	}
-	return lastScore
 }
 
 func main() {
