@@ -12,9 +12,9 @@ type Stats struct{}
 
 func (s *Stats) PrintUsage() {
 	fmt.Println("Usage:")
-	fmt.Println("./aoc submissions")
-	fmt.Println("Checks the number of solutions for the current day every")
-	fmt.Println("10 minutes and writes the output to <day>stats.csv")
+	fmt.Println("./aoc stats")
+	fmt.Println("Checks the number of solutions every minute for the first hour and then")
+	fmt.Println("every hour for the rest of the day and writes the output to <day>stats.csv")
 }
 
 func (s *Stats) Run(args []string) error {
