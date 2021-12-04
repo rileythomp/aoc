@@ -32,7 +32,7 @@ func GetAoC(uri string) ([]byte, error) {
 		return nil, err
 	}
 	client.Jar.SetCookies(urlObj, []*http.Cookie{
-		{Name: "session", Value: os.Getenv("AOC_COOKIE")},
+		{Name: "session", Value: os.Getenv("AOC_TOKEN")},
 	})
 	resp, err := client.Get(uri)
 	if err != nil {
@@ -60,7 +60,7 @@ func PostAoC(uri string, form url.Values) ([]byte, error) {
 		return nil, err
 	}
 	client.Jar.SetCookies(urlObj, []*http.Cookie{
-		{Name: "session", Value: os.Getenv("AOC_COOKIE")},
+		{Name: "session", Value: os.Getenv("AOC_TOKEN")},
 	})
 	req, err := http.NewRequest("POST", uri, strings.NewReader(form.Encode()))
 	if err != nil {

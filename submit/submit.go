@@ -12,14 +12,15 @@ import (
 	"github.com/rileythomp/aoc/utils"
 )
 
+const input = "input.txt"
+
 type Submit struct{}
 
 func (s *Submit) PrintUsage() {
 	fmt.Println("Usage:")
-	fmt.Println("./aoc submit <level> <input> <day> <year>")
+	fmt.Println("./aoc submit <level> <day> <year>")
 	fmt.Println("Defaults:")
 	fmt.Println("level: 1")
-	fmt.Println("input: test.txt")
 	fmt.Println("day:   current year")
 	fmt.Println("year:  current day")
 }
@@ -29,9 +30,9 @@ func (s *Submit) Run(args []string) error {
 	if !ok {
 		return nil
 	}
-	level, input, day, year := args[0], args[1], args[2], args[3]
+	level, day, year := args[0], args[1], args[2]
 
-	ans, err := getAnswer(input, level, year, day)
+	ans, err := getAnswer(level, year, day)
 	if err != nil {
 		return err
 	}
@@ -55,7 +56,7 @@ func (s *Submit) Run(args []string) error {
 
 func (s *Submit) GetArgs(args []string) ([]string, bool) {
 	y, _, d := time.Now().Date()
-	level, input, year, day := "1", "input.txt", fmt.Sprint(y), fmt.Sprint(d)
+	level, year, day := "1", fmt.Sprint(y), fmt.Sprint(d)
 	for i, arg := range args {
 		if arg == "-h" || arg == "--help" {
 			s.PrintUsage()
@@ -67,10 +68,8 @@ func (s *Submit) GetArgs(args []string) ([]string, bool) {
 			fmt.Println("level must be 1 or 2")
 			return []string{}, false
 		} else if i == 1 {
-			input = arg
-		} else if i == 2 {
 			day = arg
-		} else if i == 3 {
+		} else if i == 2 {
 			year = arg
 		}
 	}
@@ -84,10 +83,10 @@ func (s *Submit) GetArgs(args []string) ([]string, bool) {
 		fmt.Printf("Unexpected error with input file %s: %s\n", inputPath, err.Error())
 		return []string{}, false
 	}
-	return []string{level, input, day, year}, true
+	return []string{level, day, year}, true
 }
 
-func getAnswer(input, level, year, day string) (string, error) {
+func getAnswer(level, year, day string) (string, error) {
 	cmd := exec.Command("go", "run", "main.go", input, level)
 	dir := fmt.Sprintf("./solutions/%s/day%s/", year, day)
 	cmd.Dir = dir
