@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/rileythomp/aoc/utils"
+	"github.com/rileythomp/aoc/src/utils"
 )
 
 type Mkday struct{}

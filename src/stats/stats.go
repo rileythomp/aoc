@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rileythomp/aoc/utils"
+	"github.com/rileythomp/aoc/src/utils"
 )
 
 type Stats struct{}

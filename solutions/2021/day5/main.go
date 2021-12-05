@@ -31,6 +31,7 @@ func getPoints(str string) (int, int, int, int) {
 
 func part1(strs []string) int {
 	board := [1000][1000]int{}
+	count := 0
 	for _, str := range strs {
 		x1, y1, x2, y2 := getPoints(str)
 		miny, minx := min(y1, y2), min(x1, x2)
@@ -41,14 +42,9 @@ func part1(strs []string) int {
 		for i := miny; i <= maxy; i++ {
 			for j := minx; j <= maxx; j++ {
 				board[i][j] += 1
-			}
-		}
-	}
-	count := 0
-	for y := range board {
-		for x := range board[y] {
-			if board[y][x] > 1 {
-				count++
+				if board[i][j] == 2 {
+					count++
+				}
 			}
 		}
 	}

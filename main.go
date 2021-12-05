@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rileythomp/aoc/mkday"
-	"github.com/rileythomp/aoc/stats"
-	"github.com/rileythomp/aoc/submit"
+	"github.com/rileythomp/aoc/src/mkday"
+	"github.com/rileythomp/aoc/src/stats"
+	"github.com/rileythomp/aoc/src/submit"
 )
 
 type Program interface {
