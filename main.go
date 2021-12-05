@@ -25,6 +25,10 @@ func printUsage() {
 
 func main() {
 	args := os.Args[1:]
+	if len(args) == 0 {
+		printUsage()
+		return
+	}
 	prog := "mkday"
 	for i, arg := range args {
 		if i == 0 && (arg == "-h" || arg == "--help") {

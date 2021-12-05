@@ -33,6 +33,7 @@ func (s *Stats) Run(args []string) error {
 	fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
 
 	reqs := 0
+	year, _, day := time.Now().Date()
 	for {
 		if reqs < 60 {
 			time.Sleep(time.Minute)
@@ -42,7 +43,7 @@ func (s *Stats) Run(args []string) error {
 			break
 		}
 		reqs++
-		if err := writeStats(); err != nil {
+		if err := writeStats(day, year); err != nil {
 			return err
 		}
 	}
@@ -60,8 +61,7 @@ func (s *Stats) GetArgs(args []string) ([]string, bool) {
 	return []string{}, true
 }
 
-func writeStats() error {
-	year, _, day := time.Now().Date()
+func writeStats(day, year int) error {
 	uri := fmt.Sprintf("https://adventofcode.com/%d/stats", year)
 	statsData, err := utils.GetAoC(uri)
 	if err != nil {
@@ -71,7 +71,7 @@ func writeStats() error {
 	lines := strings.Split(html, "\n")
 	for _, line := range lines {
 		if strings.Contains(line, fmt.Sprintf(" %d ", day)) {
-			parts := strings.Split(line, " ")
+			parts := strings.Fields(line)
 			if len(parts) < 7 {
 				return fmt.Errorf("unexpected response from %s: %s", uri, line)
 			}
