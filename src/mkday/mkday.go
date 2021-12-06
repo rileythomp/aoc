@@ -81,7 +81,7 @@ func (m *Mkday) createFiles(year, day string) error {
 	if err != nil {
 		return err
 	}
-	boilerplate, err := utils.GetFile("./mkday/boilerplate.txt")
+	boilerplate, err := utils.GetFile("./src/mkday/boilerplate.txt")
 	if err != nil {
 		return err
 	}
