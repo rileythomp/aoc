@@ -30,10 +30,10 @@ func part1(strs []string) int {
 }
 
 func part2(strs []string) int {
-	// very slow, 3:15 to calculate answer
+	// very slow, 3:30 to calculate answer
 	line := strs[0]
 	vals := strings.Split(line, ",")
-	d1, d2 := 1, 220
+	d1, d2 := 1, 256
 	stack := make([][2]int, math.MaxInt32)
 	length, children := 0, 0
 	for i := range vals {
@@ -45,9 +45,9 @@ func part2(strs []string) int {
 	cache := make(map[int]int)
 	curParent, curChildren := 0, 0
 	for length > 0 {
-		triple := stack[length-1]
+		daynum := stack[length-1]
 		length--
-		d1, n := triple[0], triple[1]
+		d1, n := daynum[0], daynum[1]
 		if d1+n >= d2 {
 			continue
 		}
@@ -68,7 +68,6 @@ func part2(strs []string) int {
 			length++
 		}
 	}
-	cache[curParent] = curChildren
 	return children
 }
 
@@ -115,36 +114,4 @@ func getArgs() (string, string) {
 		}
 	}
 	return level, name
-}
-
-type Stack [][2]int
-
-func IsEmpty(s Stack) bool {
-	return len(s) == 0
-}
-
-func (s *Stack) IsEmpty() bool {
-	return len(*s) == 0
-}
-
-func (s *Stack) Push(str [2]int) {
-	*s = append(*s, str)
-}
-
-func (s *Stack) Pop() [2]int {
-	if s.IsEmpty() {
-		return [2]int{}
-	}
-	i := len(*s) - 1
-	str := (*s)[i]
-	*s = (*s)[:i]
-	return str
-}
-
-func (s *Stack) Top() [2]int {
-	if s.IsEmpty() {
-		return [2]int{}
-	}
-	str := (*s)[len(*s)-1]
-	return str
 }
