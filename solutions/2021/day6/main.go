@@ -33,23 +33,17 @@ func part2(strs []string) int {
 	line := strs[0]
 	vals := strings.Split(line, ",")
 	days := make([]int, 9)
-	children := 0
 	for i := range vals {
 		d, _ := strconv.Atoi(vals[i])
 		days[d]++
-		children++
 	}
 	for i := 0; i < 256; i++ {
 		days0 := days[0]
-		children += days0
-		for j := 0; j < 6; j++ {
-			days[j] = days[j+1]
-		}
-		days[6] = days0 + days[7]
-		days[7] = days[8]
-		days[8] = days0
+		days[0], days[1], days[2] = days[1], days[2], days[3]
+		days[3], days[4], days[5] = days[4], days[5], days[6]
+		days[6], days[7], days[8] = days0+days[7], days[8], days0
 	}
-	return children
+	return days[0] + days[1] + days[2] + days[3] + days[4] + days[5] + days[6] + days[7] + days[8]
 }
 
 func part2_old(strs []string) int {
@@ -105,12 +99,9 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	strs := []string{}
-	nums := []int{}
 	for scanner.Scan() {
 		str := scanner.Text()
 		strs = append(strs, str)
-		num, _ := strconv.Atoi(str)
-		nums = append(nums, num)
 	}
 
 	if level == "1" {
