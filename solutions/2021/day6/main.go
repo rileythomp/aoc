@@ -30,6 +30,29 @@ func part1(strs []string) int {
 }
 
 func part2(strs []string) int {
+	line := strs[0]
+	vals := strings.Split(line, ",")
+	days := make([]int, 9)
+	children := 0
+	for i := range vals {
+		d, _ := strconv.Atoi(vals[i])
+		days[d]++
+		children++
+	}
+	for i := 0; i < 256; i++ {
+		days0 := days[0]
+		children += days0
+		for j := 0; j < 6; j++ {
+			days[j] = days[j+1]
+		}
+		days[6] = days0 + days[7]
+		days[7] = days[8]
+		days[8] = days0
+	}
+	return children
+}
+
+func part2_old(strs []string) int {
 	// very slow, 3:30 to calculate answer
 	line := strs[0]
 	vals := strings.Split(line, ",")
