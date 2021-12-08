@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -80,12 +79,9 @@ func calcVal(line string) int {
 }
 
 func part2(strs []string) int {
-	count := 0
 	val := 0
-	_ = count
-	_ = val
-	for i := range strs {
-		val += calcVal(strs[i])
+	for _, str := range strs {
+		val += calcVal(str)
 	}
 	return val
 }
@@ -101,12 +97,9 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	strs := []string{}
-	nums := []int{}
 	for scanner.Scan() {
 		str := scanner.Text()
 		strs = append(strs, str)
-		num, _ := strconv.Atoi(str)
-		nums = append(nums, num)
 	}
 
 	if level == "1" {

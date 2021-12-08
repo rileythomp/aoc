@@ -26,12 +26,9 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	strs := []string{}
-	nums := []int{}
 	for scanner.Scan() {
 		str := scanner.Text()
 		strs = append(strs, str)
-		num, _ := strconv.Atoi(str)
-		nums = append(nums, num)
 	}
 
 	if level == "1" {
