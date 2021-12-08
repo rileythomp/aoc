@@ -22,15 +22,6 @@ func part1(strs []string) int {
 	return count
 }
 
-func hasVal(str string, val string) bool {
-	for _, c := range val {
-		if !strings.Contains(str, string(c)) {
-			return false
-		}
-	}
-	return true
-}
-
 func valParts(str, val string) int {
 	parts := 0
 	for _, c := range val {
@@ -47,50 +38,40 @@ func calcVal(line string) int {
 	numstr, strnum := make(map[int]string), make(map[string]int)
 	for _, str := range input {
 		if len(str) == 2 {
-			numstr[1] = str
-			strnum[str] = 1
+			numstr[1], strnum[str] = str, 1
 		} else if len(str) == 3 {
-			numstr[7] = str
-			strnum[str] = 7
+			numstr[7], strnum[str] = str, 7
 		} else if len(str) == 4 {
-			numstr[4] = str
-			strnum[str] = 4
+			numstr[4], strnum[str] = str, 4
 		} else if len(str) == 7 {
-			numstr[8] = str
-			strnum[str] = 8
+			numstr[8], strnum[str] = str, 8
 		}
 	}
 	oneval, fourval := numstr[1], numstr[4]
 	for _, str := range input {
 		if len(str) == 6 {
-			if !hasVal(str, oneval) {
-				numstr[6] = str
-				strnum[str] = 6
-			} else if hasVal(str, fourval) {
-				numstr[9] = str
-				strnum[str] = 9
+			if valParts(str, oneval) != len(oneval) {
+				numstr[6], strnum[str] = str, 6
+			} else if valParts(str, fourval) == len(fourval) {
+				numstr[9], strnum[str] = str, 9
 			} else {
-				numstr[0] = str
-				strnum[str] = 0
+				numstr[0], strnum[str] = str, 0
 			}
 
 		} else if len(str) == 5 {
-			if hasVal(str, oneval) {
-				numstr[3] = str
-				strnum[str] = 3
+			if valParts(str, oneval) == len(oneval) {
+				numstr[3], strnum[str] = str, 3
 			} else if valParts(str, fourval) == 3 {
-				numstr[5] = str
-				strnum[str] = 5
+				numstr[5], strnum[str] = str, 5
 			} else {
-				numstr[2] = str
-				strnum[str] = 2
+				numstr[2], strnum[str] = str, 2
 			}
 		}
 	}
 	val := 0
 	for _, str := range output {
 		for k, v := range strnum {
-			if len(k) == len(str) && hasVal(k, str) {
+			if len(k) == len(str) && valParts(k, str) == len(str) {
 				val = 10*val + v
 			}
 		}
