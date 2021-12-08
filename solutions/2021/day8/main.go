@@ -127,31 +127,3 @@ func getArgs() (string, string) {
 	}
 	return level, name
 }
-
-type Stack []string
-
-func (s *Stack) IsEmpty() bool {
-	return len(*s) == 0
-}
-
-func (s *Stack) Push(str string) {
-	*s = append(*s, str)
-}
-
-func (s *Stack) Pop() string {
-	if s.IsEmpty() {
-		return ""
-	}
-	i := len(*s) - 1
-	str := (*s)[i]
-	*s = (*s)[:i]
-	return str
-}
-
-func (s *Stack) Top() string {
-	if s.IsEmpty() {
-		return ""
-	}
-	str := (*s)[len(*s)-1]
-	return str
-}
