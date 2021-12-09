@@ -62,7 +62,7 @@ func part2(strs []string) int {
 			if val < 0 || val == 9 {
 				continue
 			}
-			board[y][x] *= 9
+			board[y][x] = 9
 			basinSize := 1
 			stack := Stack{[]int{y, x}}
 			for !stack.IsEmpty() {
