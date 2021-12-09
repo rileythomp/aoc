@@ -59,7 +59,7 @@ func part2(strs []string) int {
 	basinSizes := []int{}
 	for y, row := range board {
 		for x, val := range row {
-			if val < 0 || val == 9 {
+			if val == 9 {
 				continue
 			}
 			board[y][x] = 9
