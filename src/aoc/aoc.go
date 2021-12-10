@@ -1,14 +1,140 @@
 package aoc
 
-import "strconv"
+import (
+	"math"
+	"sort"
+	"strconv"
+)
+
+type List []interface{}
+
+func (l *List) Len() int {
+	return len(*l)
+}
+
+func (l *List) IsEmpty() bool {
+	return l.Len() == 0
+}
+
+func (l *List) Prepend(elem interface{}) {
+	*l = append([]interface{}{elem}, *l...)
+}
+
+func (l *List) Append(elem interface{}) {
+	*l = append(*l, elem)
+}
+
+func (l *List) Contains(elem interface{}) bool {
+	for _, e := range *l {
+		if elem == e {
+			return true
+		}
+	}
+	return false
+}
+
+func (l *List) At(i int) interface{} {
+	if l.IsEmpty() || i >= l.Len() {
+		return nil
+	}
+	return (*l)[i]
+}
+
+func (l *List) InsertAt(elem interface{}, i int) {
+	elems := make([]interface{}, l.Len()+1)
+	for j := range elems {
+		if j < i {
+			elems[j] = l.At(j)
+		} else if j == i {
+			elems[j] = elem
+		} else {
+			elems[j] = l.At(j - 1)
+		}
+	}
+	*l = elems
+}
+
+func (l *List) First() interface{} {
+	if l.IsEmpty() {
+		return nil
+	}
+	return (*l)[0]
+}
+
+func (l *List) Last() interface{} {
+	if l.IsEmpty() {
+		return nil
+	}
+	return (*l)[l.Len()-1]
+}
+
+func (l *List) Pop() interface{} {
+	if l.IsEmpty() {
+		return nil
+	}
+	i := l.Len() - 1
+	e := (*l)[i]
+	*l = (*l)[:i]
+	return e
+}
 
 func StrToNums(str string) []int {
-	nums := []int{}
-	for _, c := range str {
+	nums := make([]int, len(str))
+	for i, c := range str {
 		num, _ := strconv.Atoi(string(c))
-		nums = append(nums, num)
+		nums[i] = num
 	}
 	return nums
+}
+
+func Mean(nums []int) int {
+	sum := 0
+	for _, num := range nums {
+		sum += num
+	}
+	return sum
+}
+
+func Median(nums []int) int {
+	sort.Slice(nums, func(i, j int) bool { return nums[i] > nums[j] })
+	return nums[len(nums)/2]
+}
+
+func Mode(nums []int) int {
+	freqMap := map[int]int{}
+	mode, modeFreq := 0, 0
+	for _, num := range nums {
+		if _, ok := freqMap[num]; ok {
+			freqMap[num]++
+			if freqMap[num] > modeFreq {
+				modeFreq = freqMap[num]
+				mode = num
+			}
+		} else {
+			freqMap[num] = 1
+		}
+	}
+	return mode
+}
+
+func Largest(nums []int) int {
+	max := math.MinInt32
+	for _, num := range nums {
+		if num > max {
+			max = num
+		}
+	}
+	return max
+}
+
+func Smallest(nums []int) int {
+	min := math.MaxInt32
+	for _, num := range nums {
+		if num < min {
+			min = num
+		}
+	}
+	return min
 }
 
 func ContainsInt(list []int, elem int) bool {
