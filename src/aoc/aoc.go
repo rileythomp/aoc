@@ -2,6 +2,24 @@ package aoc
 
 import "strconv"
 
+func StrToNums(str string) []int {
+	nums := []int{}
+	for _, c := range str {
+		num, _ := strconv.Atoi(string(c))
+		nums = append(nums, num)
+	}
+	return nums
+}
+
+func Contains(list []interface{}, elem interface{}) bool {
+	for _, e := range list {
+		if elem == e {
+			return true
+		}
+	}
+	return false
+}
+
 func Min(a, b int) int {
 	if a < b {
 		return a
@@ -76,13 +94,4 @@ func (s *Stack) Top() interface{} {
 	}
 	e := (*s)[len(*s)-1]
 	return e
-}
-
-func StrToNums(str string) []int {
-	nums := []int{}
-	for _, c := range str {
-		num, _ := strconv.Atoi(string(c))
-		nums = append(nums, num)
-	}
-	return nums
 }
