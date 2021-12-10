@@ -29,12 +29,9 @@ func part1(strs []string) int {
 			char := string(c)
 			if strings.Contains("({[<", char) {
 				stack.Push(char)
-			} else {
-				open := stack.Pop()
-				if char != brackets[open] {
-					score += scores[char]
-					break
-				}
+			} else if char != brackets[stack.Pop()] {
+				score += scores[char]
+				break
 			}
 		}
 	}
@@ -56,12 +53,9 @@ func part2(strs []string) int {
 			char := string(c)
 			if strings.Contains("({[<", char) {
 				stack.Push(char)
-			} else {
-				open := stack.Pop()
-				if char != brackets[open] {
-					broke = true
-					break
-				}
+			} else if char != brackets[stack.Pop()] {
+				broke = true
+				break
 			}
 		}
 		if broke {
