@@ -87,12 +87,16 @@ func StrToNums(str string) []int {
 	return nums
 }
 
-func Mean(nums []int) int {
+func Sum(nums []int) int {
 	sum := 0
 	for _, num := range nums {
 		sum += num
 	}
 	return sum
+}
+
+func Mean(nums []int) float64 {
+	return float64(Sum(nums)) / float64(len(nums))
 }
 
 func Median(nums []int) int {
