@@ -8,7 +8,20 @@ import (
 	"strings"
 )
 
+var brackets = map[string]string{
+	"(": ")",
+	"[": "]",
+	"{": "}",
+	"<": ">",
+}
+
 func part1(strs []string) int {
+	scores := map[string]int{
+		")": 3,
+		"]": 57,
+		"}": 1197,
+		">": 25137,
+	}
 	score := 0
 	for _, str := range strs {
 		stack := Stack{}
@@ -17,21 +30,10 @@ func part1(strs []string) int {
 			if strings.Contains("({[<", char) {
 				stack.Push(char)
 			} else {
-				top := stack.Top()
-				if char == ")" && top != "(" {
-					score += 3
+				open := stack.Pop()
+				if char != brackets[open] {
+					score += scores[char]
 					break
-				} else if char == "}" && top != "{" {
-					score += 1197
-					break
-				} else if char == "]" && top != "[" {
-					score += 57
-					break
-				} else if char == ">" && top != "<" {
-					score += 25137
-					break
-				} else {
-					stack.Pop()
 				}
 			}
 		}
@@ -40,6 +42,12 @@ func part1(strs []string) int {
 }
 
 func part2(strs []string) int {
+	scoreMap := map[string]int{
+		"(": 1,
+		"[": 2,
+		"{": 3,
+		"<": 4,
+	}
 	scores := []int{}
 	for _, str := range strs {
 		stack := Stack{}
@@ -49,21 +57,10 @@ func part2(strs []string) int {
 			if strings.Contains("({[<", char) {
 				stack.Push(char)
 			} else {
-				top := stack.Top()
-				if char == ")" && top != "(" {
+				open := stack.Pop()
+				if char != brackets[open] {
 					broke = true
 					break
-				} else if char == "}" && top != "{" {
-					broke = true
-					break
-				} else if char == "]" && top != "[" {
-					broke = true
-					break
-				} else if char == ">" && top != "<" {
-					broke = true
-					break
-				} else {
-					stack.Pop()
 				}
 			}
 		}
@@ -71,16 +68,7 @@ func part2(strs []string) int {
 			continue
 		}
 		for !stack.IsEmpty() {
-			elem := stack.Pop()
-			if elem == "(" {
-				score = 5*score + 1
-			} else if elem == "{" {
-				score = 5*score + 3
-			} else if elem == "[" {
-				score = 5*score + 2
-			} else if elem == "<" {
-				score = 5*score + 4
-			}
+			score = 5*score + scoreMap[stack.Pop()]
 		}
 		scores = append(scores, score)
 	}
