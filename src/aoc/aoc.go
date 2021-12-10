@@ -16,32 +16,59 @@ func Max(a, b int) int {
 	return b
 }
 
+type Queue []interface{}
+
+func (q *Queue) IsEmpty() bool {
+	return len(*q) == 0
+}
+
+func (q *Queue) Push(e interface{}) {
+	*q = append(*q, e)
+}
+
+func (q *Queue) Pop() interface{} {
+	if q.IsEmpty() {
+		return nil
+	}
+	e := (*q)[0]
+	*q = (*q)[1:]
+	return e
+}
+
+func (s *Queue) Front() interface{} {
+	if s.IsEmpty() {
+		return nil
+	}
+	e := (*s)[0]
+	return e
+}
+
 type Stack []interface{}
 
 func (s *Stack) IsEmpty() bool {
 	return len(*s) == 0
 }
 
-func (s *Stack) Push(str interface{}) {
-	*s = append(*s, str)
+func (s *Stack) Push(e interface{}) {
+	*s = append(*s, e)
 }
 
 func (s *Stack) Pop() interface{} {
 	if s.IsEmpty() {
-		return ""
+		return nil
 	}
 	i := len(*s) - 1
-	str := (*s)[i]
+	e := (*s)[i]
 	*s = (*s)[:i]
-	return str
+	return e
 }
 
 func (s *Stack) Top() interface{} {
 	if s.IsEmpty() {
-		return ""
+		return nil
 	}
-	str := (*s)[len(*s)-1]
-	return str
+	e := (*s)[len(*s)-1]
+	return e
 }
 
 func StrToNums(str string) []int {
