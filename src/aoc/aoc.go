@@ -34,7 +34,7 @@ func (l *List) Contains(elem interface{}) bool {
 }
 
 func (l *List) At(i int) interface{} {
-	if l.IsEmpty() || i < 0 || i >= l.Len() || {
+	if l.IsEmpty() || i < 0 || i >= l.Len() {
 		return nil
 	}
 	return (*l)[i]
