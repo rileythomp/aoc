@@ -11,7 +11,16 @@ func StrToNums(str string) []int {
 	return nums
 }
 
-func Contains(list []interface{}, elem interface{}) bool {
+func ContainsInt(list []int, elem int) bool {
+	for _, e := range list {
+		if elem == e {
+			return true
+		}
+	}
+	return false
+}
+
+func ContainsStr(list []string, elem string) bool {
 	for _, e := range list {
 		if elem == e {
 			return true
@@ -36,7 +45,7 @@ func Max(a, b int) int {
 
 func Abs(a int) int {
 	if a < 0 {
-		return -1*a
+		return -1 * a
 	}
 	return a
 }
