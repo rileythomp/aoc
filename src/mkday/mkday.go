@@ -61,6 +61,7 @@ func (m *Mkday) GetArgs(args []string) ([]string, bool) {
 			_, _, curDay = time.Now().Date()
 		}
 		fmt.Printf("Waited for %d minutes and %d seconds\n", seconds/60, seconds%60)
+		time.Sleep(time.Second)
 	}
 	return []string{year, day}, true
 }
