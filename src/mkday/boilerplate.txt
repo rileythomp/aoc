@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
+	_ "github.com/rileythomp/aoc/src/aoc"
 )
 
 func part1(strs []string) int {
@@ -27,8 +27,7 @@ func main() {
 
 	strs := []string{}
 	for scanner.Scan() {
-		str := scanner.Text()
-		strs = append(strs, str)
+		strs = append(strs, scanner.Text())
 	}
 
 	if level == "1" {
