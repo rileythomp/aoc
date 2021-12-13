@@ -4,6 +4,7 @@ import (
 	"math"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 type List []interface{}
@@ -85,6 +86,24 @@ func StrToNums(str string) []int {
 		nums[i] = num
 	}
 	return nums
+}
+
+func IsUppercase(str string) bool {
+	for _, c := range str {
+		if !strings.Contains("ABCDEFGHIJKLMNOPQRSTUVWXYZ", string(c)) {
+			return false
+		}
+	}
+	return true
+}
+
+func IsLowercase(str string) bool {
+	for _, c := range str {
+		if !strings.Contains("abcdefghijklmnopqrstuvwxyz", string(c)) {
+			return false
+		}
+	}
+	return true
 }
 
 func Sum(nums []int) int {
