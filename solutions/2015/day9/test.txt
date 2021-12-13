@@ -1,6 +1,0 @@
-a to b = 1
-a to c = 3
-a to d = 5
-b to c = 2
-b to d = 4
-c to d = 6
