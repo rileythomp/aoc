@@ -45,30 +45,52 @@ func part1(strs []string) int {
 	return max - min
 }
 
+func copyMap(m1 map[string]int) map[string]int {
+	m2 := make(map[string]int)
+	for k, v := range m1 {
+		m2[k] = v
+	}
+	return m2
+}
+
 func part2(strs []string) int {
 	polymer := strs[0]
 	rules := map[string]string{}
+	pairs := map[string]int{}
 	for _, str := range strs[2:] {
 		parts := strings.Fields(str)
 		rules[parts[0]] = parts[2]
-	}
-	for step := 0; step < 40; step++ {
-		curpoly := polymer
-		for i := 0; i < len(curpoly)-1; i++ {
-			pair := string(curpoly[i]) + string(curpoly[i+1])
-			insert := rules[pair]
-			polymer = polymer[:(2*i+1)] + insert + polymer[(2*i+1):]
-		}
+		pairs[parts[0]] = 0
 	}
 	countmap := map[string]int{}
-	for _, c := range polymer {
-		if _, ok := countmap[string(c)]; ok {
-			countmap[string(c)]++
+	for i := 0; i < len(polymer)-1; i++ {
+		pair := string(polymer[i]) + string(polymer[i+1])
+		pairs[pair]++
+		if _, ok := countmap[string(polymer[i])]; ok {
+			countmap[string(polymer[i])]++
 		} else {
-			countmap[string(c)] = 0
+			countmap[string(polymer[i])] = 1
 		}
 	}
-	max, min := math.MinInt32, math.MaxInt32
+	if _, ok := countmap[string(polymer[len(polymer)-1])]; ok {
+		countmap[string(polymer[len(polymer)-1])]++
+	} else {
+		countmap[string(polymer[len(polymer)-1])] = 1
+	}
+	for step := 0; step < 40; step++ {
+		curPairs := copyMap(pairs)
+		for k, v := range curPairs {
+			if v < 1 {
+				continue
+			}
+			insert := rules[k]
+			countmap[insert] += v
+			pairs[k] -= v
+			pairs[string(k[0])+insert] += v
+			pairs[insert+string(k[1])] += v
+		}
+	}
+	max, min := math.MinInt64, math.MaxInt64
 	for _, v := range countmap {
 		if v > max {
 			max = v
